@@ -115,31 +115,29 @@
 
 8 To check a number is palindromeor not .
     pseudo: routine
-    function isPalindrome(num){
-        set rev = 0
-        temp = num
-        while temp > 0 do 
-        rem = temp % 10
-        rev = rev * 10 + rem
-        temp = temp % 10
-
-    return temp == n
-    end while
-        
-    }
+	    function isPalindrome(num)
+	        set rev = 0
+	        temp = num
+	        while temp > 0 do 
+	        rem = temp % 10
+	        rev = rev * 10 + rem
+	        temp = temp % 10
+	    return temp == n
+	    end while
+	        
 
     pseudo: routine test
-    function testIsPalindrome(){
-        input num
-        if isPalindrome(num)
-        print("the number is palindrome")
-        else
-        print("the number is not palindrome")
-    }
+	    function testIsPalindrome()
+	        input num
+	        if isPalindrome(num)
+	        print("the number is palindrome")
+	        else
+	        print("the number is not palindrome")
+    
 
 9. To check amstrong number or not   
     pseudo :routine
-        function isArmstrongNumber(num){
+        function isArmstrongNumber(num)
             set temp = num
             set sum = 0
             while temp > 0 do
@@ -150,16 +148,15 @@
             end while
 
             return sum ==num
-        }
 
     pseudo :routine test
-        function testIsArmstrongNumber(){
+        function testIsArmstrongNumber()
             input num
             if isArmstrongNumber(num)
-            print("the given number is armstrong")
+            	print("the given number is armstrong")
             else
-            print("the given number is not armstrong)
-        }
+           	 print("the given number is not armstrong)
+        
 
 10 To check prime number or not
 
@@ -174,52 +171,49 @@ function isPrimeNumber(num)
 pseudocode:routine test
 
 pseudo  routine: test
-function testIsPrimeNumber(){
+function testIsPrimeNumber()
     input num
     if isPrimeNumber(num)
       print("the number is prime")
     else
       print("the number is not prime)
-}
+
 
 
 11.To check a number is perfect or not
 pseudo : routine
-function isPerfectNumber(num){
-    set sum = 0
-    temp = num
-    for i from 1 to num-1 do
-      if temp % i ==0
-         sum = sum + i
+	function isPerfectNumber(num)
+	    set sum = 0
+	    temp = num
+	    for i from 1 to num-1 do
+	      if temp % i ==0
+	         sum = sum + i
+	    return sum == num   
 
-    return sum == num   
-}
 
 pseudo: routine test
-function testIsPerfectNumber(){
-    input num
-    if isPerfectNumber(num)
-      print("perfect number)
-    else
-      print("not perfect number")
-}
+	function testIsPerfectNumber()
+	    input num
+	    if isPerfectNumber(num)
+	      print("perfect number)
+	    else
+	      print("not perfect number")
+	
 
 
 12.To check a number is even or odd
 
-
 pseudo : routine
-function oddOrEven(num){
-    if num % 2 == 0
-      print("odd number")
-    end if
-    else:
-      print("even number")
-}
+	function oddOrEven(num)
+	    if num % 2 == 0
+	      print("odd number")
+	    else:
+	      print("even number")
 
-test routine:
-function testOddOrEven(){
-    input num 
-    oddOrEven(num)
-}
+
+Pseudo routine:test
+	function testOddOrEven()
+	    input num 
+	    oddOrEven(num)
+		
 
