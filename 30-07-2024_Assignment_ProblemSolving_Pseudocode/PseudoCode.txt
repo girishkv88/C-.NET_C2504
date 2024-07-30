@@ -1,102 +1,162 @@
-Average of two numbers
 
-pseudo: 
-    Input num1
-    Input num2
-    sum = num1 + num2 
-    average = sum / 2
-    print average 
+1.Average of two numbers
 
-Pseudo: routine
-	Function AvgOfNum(num1,num2)
-		sum = num1+num2
-		average = sum / 2
-		return average
-pseudo: routine test
-     Procedure TestAvgOfNum()
-        	Input num1
-	Input num2 
-   	average= AvgOfNum(num1,num2)
-        	print average
-		
-To find cube of number.
+    pseudo: 
+        Input num1
+        Input num2
+        sum = num1 + num2 
+        average = sum / 2
+        print average 
 
-pseudo: routine 
-    Function FindCube(num)
-        cube = num * num * num 
-        Return cube 
-    
-pseudo: routine test
-    Procedure TestFindCube()
-        Input num 
-        cube = FindCube(num)
-        Print cube 
+    Pseudo: routine
+        Function AvgOfNum(num1,num2)
+            sum = num1+num2
+            average = sum / 2
+            return average
+    pseudo: routine test
+        Procedure TestAvgOfNum()
+            Input num1
+            Input num2 
+            average= AvgOfNum(num1,num2)
+            print average
+            
+2 To find cube of number.
+
+    pseudo: routine 
+        Function FindCube(num)
+            cube = num * num * num 
+            Return cube 
+        
+    pseudo: routine test
+        Procedure TestFindCube()
+            Input num 
+            cube = FindCube(num)
+            Print cube 
 
 
-***to find square of the number. 
-pseudo: routine 
-    Function FindSquare(num)
-        cube = num * num
-        Return square
-    
-pseudo: routine test
-    Procedure TestFindSquare()
-        Input num 
-        square= FindSquare(num)
-        Print square
+3 To find find square of the number. 
 
-***swap two numbers. 
-pseudo: routine 
-    Function swap(num1,num2)
-	temp =num1
-	num1=num2
-	num2=temp
-	return num1,num2
-pseudo: routine 
-    Procedure swap()
-	Input num1
-	Input num2
-	result=swap(num1,num2)
-	print result
+    pseudo: routine 
+        Function FindSquare(num)
+            cube = num * num
+            Return square
+        
+    pseudo: routine test
+        Procedure TestFindSquare()
+            Input num 
+            square= FindSquare(num)
+            Print square
+
+4 Swap two numbers. 
+    pseudo: routine 
+        Function swap(num1,num2)
+        temp =num1
+        num1=num2
+        num2=temp
+        return num1,num2
+
+    pseudo: routine test
+        Procedure swap()
+        Input num1
+        Input num2
+        result=swap(num1,num2)
+        print result
 	
 
-**number divisible by 3
+5 check whether a number is divisible by 3
 
-pseudo: routine 
-    function IsDivisibleBy3(num)
-        if num % 3== 0
-            return True 
-        else 
-            return False 
-        
-
-pseudo: routine test 
-    function TestIsDivisibleBy3()
-        input num 
-        if IsDivisibleBy3(num)
-            print "Divisible By 3"
-        else 
-            print "Not Divisible By 3"
+    pseudo: routine 
+        function IsDivisibleBy3(num)
+            if num % 3== 0
+                return True 
+            else 
+                return False 
             
 
-***number divisible by 27
+    pseudo: routine test 
+        function TestIsDivisibleBy3()
+            input num 
+            if IsDivisibleBy3(num)
+                print "Divisible By 3"
+            else 
+                print "Not Divisible By 3"
+            
+6 check whether a number is divisible by  27
 
-pseudo: routine 
-    function IsDivisibleBy27(num)
-        if num % 27 == 0
-            return True 
-        else 
-            return False 
+    pseudo: routine 
+        function IsDivisibleBy27(num)
+            if num % 27 == 0
+                return True 
+            else 
+                return False 
+            
+
+    pseudo: routine test
+        function TestIsDivisibleBy27()
+            input num 
+            if IsDivisibleBy27(num)
+                print "Divisible By 27"
+            else 
+                print "Not Divisible By 27"
+
+7 To print N natural numbers.
+
+    pseudo: Routine 
+        Function PrintNNumbers(N)
+            For i from 1 to N Do
+                Print i
+            End For
+
+    pseudo: Routine test
+        Function TestPrintNNumbers()
+            Input: N
+            PrintNNumbers(N)
+
+
+8 To check a number is palindromeor not .
+    pseudo: routine
+    function isPalindrome(num){
+        set rev = 0
+        temp = num
+        while temp > 0 do 
+        rem = temp % 10
+        rev = rev * 10 + rem
+        temp = temp % 10
+
+    return temp == n
+    end while
         
+    }
 
-pseudo: routine test 
-    function TestIsDivisibleBy27()
-        input num 
-        if IsDivisibleBy27(num)
-            print "Divisible By 27"
-        else 
-            print "Not Divisible By 27"
+    pseudo: routine test
+    function testIsPalindrome(){
+        input num
+        if isPalindrome(num)
+        print("the number is palindrome")
+        else
+        print("the number is not palindrome")
+    }
 
+9. To check amstrong number or not   
+    pseudo :routine
+        function isArmstrongNumber(num){
+            set temp = num
+            set sum = 0
+            while temp > 0 do
+            rem = tem % 10
+            sum = sum + rem ^ no_of_digits
+            temp = temp /10
+            
+            end while
 
-***to check a number palindrome.
+            return sum ==num
+        }
 
+    pseudo :routine test
+        function testIsArmstrongNumber(){
+            input num
+            if isArmstrongNumber(num)
+            print("the given number is armstrong")
+            else
+            print("the given number is not armstrong)
+        }
