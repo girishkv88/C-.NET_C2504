@@ -160,3 +160,66 @@
             else
             print("the given number is not armstrong)
         }
+
+10 To check prime number or not
+
+pseudocode:routine
+function isPrimeNumber(num)
+	if num <= 1
+	    return False
+	for i from 2 to sqrt(num)
+		if num % i == 0
+			return false
+	return True
+pseudocode:routine test
+
+pseudo  routine: test
+function testIsPrimeNumber(){
+    input num
+    if isPrimeNumber(num)
+      print("the number is prime")
+    else
+      print("the number is not prime)
+}
+
+
+11.To check a number is perfect or not
+pseudo : routine
+function isPerfectNumber(num){
+    set sum = 0
+    temp = num
+    for i from 1 to num-1 do
+      if temp % i ==0
+         sum = sum + i
+
+    return sum == num   
+}
+
+pseudo: routine test
+function testIsPerfectNumber(){
+    input num
+    if isPerfectNumber(num)
+      print("perfect number)
+    else
+      print("not perfect number")
+}
+
+
+12.To check a number is even or odd
+
+
+pseudo : routine
+function oddOrEven(num){
+    if num % 2 == 0
+      print("odd number")
+    end if
+    else:
+      print("even number")
+}
+
+test routine:
+function testOddOrEven(){
+    input num 
+    oddOrEven(num)
+}
+
