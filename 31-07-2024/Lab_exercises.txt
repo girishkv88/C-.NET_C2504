@@ -1,0 +1,319 @@
+
+*******************************************************************
+Shopping Cart Total:
+Write pseudocode for calculating the total cost of items in a shopping cart, including applying a discount if the total exceeds a certain amount.
+*******************************************************************
+Initialize variables
+double total cost =0.0
+double discount = 0.0
+double  discountThreshold = 100
+double discountRate = 0.2
+
+Get the number of items in the shopping cart
+ int numberOfItems=input
+
+Initialize an array to store item costs
+
+Loop to get the cost of each item
+Calculate the total cost
+ Check if the total cost exceeds the discount threshold
+    IF totalCost > discountThreshold THEN
+        //Calculate the discount
+        discount = totalCost * discountRate
+    END IF
+
+
+    PRINT "Total cost after discount: ", totalCost
+    PRINT "Discount applied: ", discount
+
+***************OR*****************
+BEGIN
+
+    DECLARE items AS ARRAY OF FLOAT
+
+    DECLARE total AS FLOAT
+
+    DECLARE discount AS FLOAT
+
+    DECLARE finalTotal AS FLOAT
+
+    DECLARE threshold AS FLOAT
+
+    DECLARE discountRate AS FLOAT
+ 
+    SET items = [item1, item2, item3, ..., itemN]  // Assume item1, item2, etc., are the prices of the items
+
+    SET total = 0.0
+
+    SET threshold = 100.0  // Example threshold amount for discount
+
+    SET discountRate = 0.10  // Example discount rate of 10%
+ 
+    FOR EACH item IN items
+
+        total = total + item
+
+    END FOR
+ 
+    IF total > threshold THEN
+
+        discount = total * discountRate
+
+    ELSE
+
+        discount = 0
+
+    END IF
+ 
+    finalTotal = total - discount
+ 
+    PRINT "Total before discount: ", total
+
+    PRINT "Discount applied: ", discount
+
+    PRINT "Total after discount: ", finalTotal
+
+END
+
+
+********************************************************************
+Simple Calculator: Write pseudocode for a simple calculator that takes two numbers and an operator (+, -, *, /) as input and outputs the result of the operation.
+ 
+**********************************************************************
+    read input numbers from the user
+    int num1= Console.Write("Enter the first number: ")
+    int num2= Console.Write("Enter the second number: ")
+
+    read choice
+	1.addition,2.substraction,3.mul,4div
+    
+    if choice = 1 then
+       int  result = num1 + num2
+        print result
+    else if choice = 2 then
+        int result = num1 - num2
+       print result
+    else if choice = 3 then
+        int result = num1 * num2
+        print result
+    else if choice = 4 then
+        if num2 = 0 then
+            print "division by zero is not allowed"
+        else
+           double result = num1 / num2
+            print  result
+        end if
+    end if
+
+*******OR********
+
+BEGIN
+
+    DECLARE num1, num2, result AS FLOAT
+
+    DECLARE operator AS CHAR
+ 
+    // Input numbers and operator
+
+    PRINT "Enter first number: "
+
+    INPUT num1
+ 
+    PRINT "Enter operator (+, -, *, /): "
+
+    INPUT operator
+ 
+    PRINT "Enter second number: "
+
+    INPUT num2
+ 
+    // Perform calculation based on operator
+
+    IF operator == '+' THEN
+
+        result = num1 + num2
+
+    ELSE IF operator == '-' THEN
+
+        result = num1 - num2
+
+    ELSE IF operator == '*' THEN
+
+        result = num1 * num2
+
+    ELSE IF operator == '/' THEN
+
+        IF num2 != 0 THEN
+
+            result = num1 / num2
+
+        ELSE
+
+            PRINT "Error: Division by zero"
+
+            EXIT
+
+        END IF
+
+    ELSE
+
+        PRINT "Error: Invalid operator"
+
+        EXIT
+
+    END IF
+ 
+    // Output result
+
+    PRINT "The result is: ", result
+
+END
+
+*************************************************************
+FizzBuzz:
+Write pseudocode for the FizzBuzz problem: For numbers 1 to 100, print "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for multiples of both.
+***********************************************************
+For i from 1 to 100
+        If i is divisible by 3 and i is divisible by 5
+            Print "FizzBuzz"
+        Else if i is divisible by 3
+            Print "Fizz"
+        Else if i is divisible by 5
+            Print "Buzz"
+        Else
+            continue
+        End If
+ End For
+
+
+
+*****************************************************************
+Palindrome Checker:
+Write pseudocode to check if a given string is a palindrome.
+****************************************************************
+
+
+Read the string s
+Convert it to lower case
+Then compare the charecters
+start = 0
+end = s.Length - 1 
+while (start < end)
+            if (s[start] != s[end])   
+                return false
+
+            start++
+            end--     
+return true
+
+if return value is true palindrome
+
+
+
+**********************************************************
+Find Maximum Value
+Write pseudocode to find the maximum value in an array of integers.
+**********************************************************
+
+ let have an array of integers
+
+  IF length(array) = 0 THEN
+        PRINT "Array is empty"
+ Else 
+  maxValue: Integer = array[0]
+
+    FOR i FROM 1 TO length(array) - 1 DO
+        IF array[i] > maxValue THEN
+            maxValue = array[i]
+        END IF
+    END FOR
+    RETURN maxValue
+
+**********************************************************
+Bank Account Management
+Write pseudocode to manage a simple bank account that allows deposits, withdrawals, and checking the balance.
+********************************************************
+
+double balance= 0.0
+
+
+function deposit(amount)
+    if amount <= 0 then
+        print "cant deposite."
+    else
+        balance = balance + amount
+        print "deposited: ", amount
+    end if
+end function
+
+function withdraw(amount)
+    if amount <= 0 then
+        print "withdrawal not possible."
+    else if amount > balance then
+        print "insufficient balace"
+    else
+        balance = balance - amount
+        print "withdrawn: ", amount
+    end if
+end function
+
+function checkbalance() 
+    return balance
+end function
+
+
+double amount;
+read amount to deposit
+    deposit(amount)   
+read amount to withdraw  
+    withdraw(amount)     
+    checkbalance()
+    
+
+***********************************************
+Sum of first 10 even number
+***********************************************
+
+BEGIN
+
+
+    DECLARE sum AS integer
+    DECLARE count AS integer
+    DECLARE number AS integer
+
+    SET sum = 0
+    SET count = 0
+    SET number = 2  
+
+    WHILE  count < 10 do
+        sum = sum + number   
+        number = number + 2 
+        count = count + 1   
+    END WHILE
+
+   PRINT "the sum of the first 10 even numbers is: ", sum
+
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
