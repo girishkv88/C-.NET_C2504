@@ -41,11 +41,19 @@ function TestIsMarkGreaterThan40(): -> None
         print "pass" 
     else 
         print "fail" 
+4.check tumour 
+                is cancerous if  malignant 
+                or not cancerous if benign
+            Note: tumour is string of text either malignant or benign
 
+   
+function IsCancerous(tumour->string): -> boolean
+    isCancerous = (tumour == "malignant")
+    return isCancerous
 
 else.if
 ******************
-   4.To check the person adult, teenager or child 
+   5.To check the person adult, teenager or child 
     for given age 
     function IsAdult(age) -> boolean 
         isAdult = (age >= 18);
@@ -65,7 +73,7 @@ else.if
 
 SWITCH
 **************
-5.check for car maintenance
+6.check for car maintenance
     cases :
         'O' = Oil Change, "Change Oil and Replace Oil Filter"
         'T' = Tire Rotaion, "Rotate Tire and align them properly"
