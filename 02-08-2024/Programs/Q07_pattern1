@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q07_pattern1
+{
+    internal class Program
+    {
+
+        static void PrintPattern(int numberOfRows)
+        {
+            for (int i = 1; i <= numberOfRows; i++)
+            {
+                // Print leading spaces
+                for (int j = 1; j <= numberOfRows - i; j++)
+                {
+                    Console.Write("  ");
+                }
+
+                // Print numbers
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write($"{j} ");
+                }
+
+                Console.WriteLine(); // Move to the next line after each row
+            }
+
+        }
+
+        static void TestPrintPattern()
+        {
+            Console.Write("Enter number of Rows: ");
+            int numberOfRows = int.Parse(Console.ReadLine());
+            PrintPattern(numberOfRows);
+            
+        }
+
+
+        static void Main()
+        {
+            Console.WriteLine("-----TestPrintPattern using for loop-----");
+            TestPrintPattern();
+            Console.WriteLine("-----End TestPrintPattern for loop----");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+
+
+        }
+    }
+}
