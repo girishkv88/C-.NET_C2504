@@ -1,0 +1,25 @@
+using System;
+
+namespace looping
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            for (int i = 1; i < 11; i++)//print all even nbr upto 10
+            {
+                if (i % 2 != 0)
+                { 
+                    continue;// will skips all odd numbers
+                   
+                }
+                Console.WriteLine(i);
+
+
+            }
+            Console.WriteLine("Looping compleate");
+        }
+    }
+}
