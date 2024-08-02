@@ -1,0 +1,32 @@
+using System;
+
+namespace LearnCSharp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {   
+            //Shortcut keys
+            //Comment - ctrl + /
+            //Delete entire line - shift + delete
+            //Select char - shift + arrow key
+            //Select word - ctrl + shift + arrow
+            //duplicate line - ctrl + c ,ctrl + v
+            //move lines - alt + arrow
+
+            Console.WriteLine("What is your name?");
+            string name=Console.ReadLine();
+            Console.WriteLine(name);
+            Console.WriteLine("enter a number1:");
+            int num1=int.Parse(Console.ReadLine());
+            Console.WriteLine("enter a number2:");
+            int num2=int.Parse(Console.ReadLine());
+            Console.WriteLine("sum is:");
+            Console.WriteLine(num1 + num2);
+            int a = 5;
+            int b = 10;
+            Console.WriteLine("a + b = ", a + b);
+
+        }
+    }
+}
