@@ -1,0 +1,19 @@
+using System;
+
+namespace conditional_statement
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 5;
+            int b = 6;
+            if (a > b)
+                Console.WriteLine("A is largest");
+            else if (b > a)
+                Console.WriteLine("B is largest");
+            else
+                Console.WriteLine("A nad B are equal ");
+        }
+    }
+}
