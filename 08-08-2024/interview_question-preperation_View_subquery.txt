@@ -1,0 +1,85 @@
+VIEWS AND SUBQUERY INTERVIEW QUESTION AND ANSWERS
+
+*************************VIEWS***************************************
+1.What is a view in SQL?
+
+A view is a virtual table that is based on the result set of a SELECT query. . It does not store data physically but provides a way to simplify complex queries and enhance security.
+
+
+2.Why use views?
+
+To simplify complex queries.
+To enhance security by restricting access to specific rows or columns.
+To provide a consistent, abstracted view of the data.
+To encapsulate logic and reuse SQL code.
+
+3.How do you create a view?
+
+sql
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+4.Can you update data through a view?
+
+Yes, you can update data through a view if it is based on a single table and does not include any complex joins, aggregates, or group by clauses. The view must be updatable.
+
+5.What are the limitations of views?
+
+Views cannot have triggers.
+Some views are read-only.
+You cannot index a view directly (though we can create indexed views/materialized views in some databases).
+
+6.What is the difference between a view and a table?
+
+A table physically stores data, whereas a view is a virtual table representing the result of a query
+
+7.How can you ensure security using views?
+
+By creating views that expose only specific columns or rows of data to certain users, limiting their access to the underlying table data.	
+9.How do you drop a view?
+
+
+DROP VIEW view_name;
+
+10What is an indexed view?
+
+An indexed view, also known as a materialized view, is a view that has been physically stored in the database with an index, improving performance for certain types of queries.
+
+***********************SUBQUERIES************************
+
+1.What is a subquery in SQL?
+
+A subquery is a query nested inside another query, used to return data that will be used in the main query as a condition to further restrict the data retrieved.
+
+2.Where can subqueries be used?
+
+In SELECT, INSERT, UPDATE, and DELETE statements.
+In the WHERE, HAVING, and FROM clauses.
+
+3.What are the types of subqueries?
+
+Single-row subquery: Returns zero or one row.
+Multiple-row subquery: Returns more than one row.
+Correlated subquery: References columns from the outer query.
+
+4.How do you use a subquery in the WHERE clause?
+
+sql
+
+SELECT column1, column2
+FROM table1
+WHERE column1 IN (SELECT column1 FROM table2 WHERE condition);
+
+5.What is the difference between a subquery and a join?
+
+A subquery is a query nested inside another query, often used to filter results or perform a calculation. A join combines rows from two or more tables based on a related column between them.
+
+6.Write a query to create a view that shows the employee names and their department names.eg
+
+CREATE VIEW EmployeeDepartment AS
+SELECT e.EmployeeName, d.DepartmentName
+FROM Employees e
+JOIN Departments d ON e.DepartmentID = d.DepartmentID;
