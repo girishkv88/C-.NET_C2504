@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+</html>
+<html>
+    <head>
+    
+        <title>My web page</title>
+        <style>/*here for adding css to code tad*/
+          code{
+            background-color: brown;
+          }
+           
+        </style>
+        
+    </head>
+    <body>
+      <h1>Only one h1 in one page</h1> 
+      <p>sample paragrapg here....... dadeef<code>Console.WriteLine()..it is an inline code</code>fsrgff,<br>gyjhyudsdfrt </p>
+      <hr>
+      <pre>
+           preserves  
+                 the    
+                      formatting
+      </pre>
+    </body>
+</html>
