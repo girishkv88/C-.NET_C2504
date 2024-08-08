@@ -1,0 +1,59 @@
+use sample_db;
+
+
+--VIEW----
+select * from Student;
+
+CREATE VIEW StudentData AS
+SELECT 
+    s.id AS StudentID,
+    s.firstName AS FirstName,
+    s.lastName AS LastName,
+    s.email AS Email,
+    subj.name AS Subject,
+    m.mark AS Mark
+FROM 
+    Student s
+JOIN 
+    Mark m ON s.id = m.student_id
+JOIN 
+    Subject subj ON m.subject_id = subj.id;
+
+
+
+SELECT * FROM StudentData;
+
+--stored procedure 
+
+CREATE PROCEDURE GetStudentData
+AS
+BEGIN
+    SELECT * FROM StudentData;
+END;
+
+--excecute procedure
+
+EXEC GetStudentData;
+----------------------------------------------------------------------------------------------------
+
+select * from Student;
+
+
+--procedure to insert student data
+
+CREATE PROCEDURE sp_InsertStudent
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50),
+    @Email NVARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Student (firstName, lastName, email)
+    VALUES (@FirstName, @LastName, @Email);
+
+END;
+
+--to execute the 
+EXEC sp_InsertStudent 
+    @FirstName = 'Girish', 
+    @LastName = 'KV', 
+    @Email = 'gkv@example.com';
