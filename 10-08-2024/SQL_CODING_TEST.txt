@@ -1,0 +1,128 @@
+Question 1 
+Find the Average Salary by Department
+Problem: Given an `Employees` table
+with columns `EmployeeID`, `DepartmentID`, and `Salary`,
+find the average salary for each department.
+
+Table Structure:
+```
+CREATE TABLE Employees (
+EmployeeID INT,
+DepartmentID INT,
+Salary DECIMAL(10, 2)
+);
+
+**********
+SELECT 
+    DepartmentID, 
+    AVG(Salary) AS AverageSalary
+FROM 
+    Employees
+GROUP BY 
+    DepartmentID
+
+*********************************************************************************************
+Question 2
+Find Departments with No Employees
+Problem: Given a `Departments` table and an `Employees` table,
+find departments that do not have any employees.
+Table Structure:
+```
+CREATE TABLE Departments (
+DepartmentID INT,
+DepartmentName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+EmployeeID INT,
+DepartmentID INT
+);
+
+*************
+SELECT 
+    D.DepartmentID, 
+    D.DepartmentName
+FROM 
+    Departments D
+LEFT JOIN 
+    Employees E ON D.DepartmentID = E.DepartmentID
+WHERE 
+    E.EmployeeID IS NULL;
+*************************************************************************************************
+Question 3
+Find Customers with Multiple Orders
+Problem: Given a `Customers` table and an `Orders` table
+where `Orders` contains a `CustomerID`,
+find customers who have placed more than one order.
+
+Table Structure:
+```
+CREATE TABLE Customers (
+CustomerID INT,
+Name VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+OrderID INT,
+CustomerID INT,
+OrderDate DATE
+);
+
+*************
+SELECT 
+    C.CustomerID, 
+    C.Name, 
+    COUNT(O.OrderID) AS OrderCount
+FROM 
+    Customers C
+JOIN 
+    Orders O ON C.CustomerID = O.CustomerID
+GROUP BY 
+    C.CustomerID, C.Name
+HAVING 
+    COUNT(O.OrderID) > 1;
+***************************************************************************************************
+Question 4 
+Find the Oldest and Youngest Employees
+Problem: Given an `Employees` table
+with columns `EmployeeID`, `Name`, and `DateOfBirth`,
+find the oldest and youngest employees.
+
+
+**************
+-- Finding the Oldest Employee
+SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth
+FROM 
+    Employees
+WHERE 
+    DateOfBirth = (SELECT MIN(DateOfBirth) FROM Employees);
+
+-- Finding the Youngest Employee
+SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth
+FROM 
+    Employees
+WHERE 
+    DateOfBirth = (SELECT MAX(DateOfBirth) FROM Employees);
+
+*****************************************************************************************************
+Question 5
+Find the Total Number of Orders and Total Order Value by Customer
+Problem: Given an `Orders` table,
+find the total number of orders and
+total order value for each customer.
+
+*************
+SELECT 
+    CustomerID, 
+    COUNT(OrderID) AS TotalOrders, 
+    SUM(OrderValue) AS TotalOrderValue
+FROM 
+    Orders
+GROUP BY 
+    CustomerID;
