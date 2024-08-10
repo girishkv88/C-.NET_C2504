@@ -31,6 +31,11 @@ FROM
 GROUP BY 
     DepartmentID;
 
+OUTPUT:
+    DepartmentID	    AverageSalary
+    102                	70000.000000
+    103                	85000.000000
+    104	                90000.000000
 
 --Question 2
 --Find Departments with No Employees
@@ -72,6 +77,11 @@ LEFT JOIN
 WHERE 
     E.EmployeeID IS NULL;
 
+OUTPUT:   
+DepartmentID	DepartmentName
+2	            Marketing
+4	            HR
+    
 --Question 3
 --Find Customers with Multiple Orders
 --Problem: Given a `Customers` table and an `Orders` table
@@ -106,8 +116,7 @@ VALUES
 
 SELECT 
     C.CustomerID, 
-    C.Name, 
-    COUNT(O.OrderID) AS OrderCount
+    C.Name
 FROM 
     Customers C
 JOIN 
@@ -117,6 +126,10 @@ GROUP BY
 HAVING 
     COUNT(O.OrderID) > 1;
 
+OUTPUT :
+    CustomerID	Name
+        1	    Alice Johnson
+        3	    Carol Brown
 --question 4
 --Find the Oldest and Youngest Employees
 --Problem: Given an `Employees` table
@@ -159,6 +172,51 @@ FROM
 WHERE 
     DateOfBirth = (SELECT MAX(DateOfBirth) FROM Employees);
 
+*****
+    SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth 
+FROM 
+    Employees
+WHERE 
+    DateOfBirth = (SELECT MIN(DateOfBirth) FROM Employees) OR 
+    DateOfBirth = (SELECT MAX(DateOfBirth) FROM Employees);
+
+***
+SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth 
+FROM 
+    Employees
+WHERE 
+    DateOfBirth IN ((SELECT MIN(DateOfBirth) FROM Employees ),
+   (SELECT MAX(DateOfBirth) FROM Employees));
+
+***
+SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth 
+FROM 
+    Employees
+WHERE 
+    DateOfBirth = (SELECT MIN(DateOfBirth) FROM Employees) UNION
+SELECT 
+    EmployeeID, 
+    Name, 
+    DateOfBirth
+FROM 
+    Employees
+WHERE 
+    DateOfBirth = (SELECT MAX(DateOfBirth) FROM Employees);
+
+OUTPUT :
+EmployeeID	Name	    DateOfBirth
+2	        Bob Smith	1990-12-01
+3	        Carol Brown	1975-07-30
+    
 --Question 5
 --Find the Total Number of Orders and Total Order Value by Customer
 --Problem: Given an `Orders` table,
@@ -190,3 +248,10 @@ FROM
     Orders
 GROUP BY 
     CustomerID;
+
+OUTPUT:
+CustomerID	 TotalOrders	TotalOrderValue
+1	            2	            350.00
+2	            1	            75.00
+3	            3	            390.00
+    
