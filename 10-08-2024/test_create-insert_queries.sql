@@ -2,6 +2,12 @@ create database testdb;
 use testdb;
 
 --question 1
+--Find the Average Salary by Department
+--Problem: Given an `Employees` table
+--with columns `EmployeeID`, `DepartmentID`, and `Salary`,
+--find the average salary for each department.
+
+
 CREATE TABLE Employees (
 EmployeeID INT,
 DepartmentID INT,
@@ -27,6 +33,10 @@ GROUP BY
 
 
 --Question 2
+--Find Departments with No Employees
+--Problem: Given a `Departments` table and an `Employees` table,
+--find departments that do not have any employees.
+
 create database testdb1;
 use testdb1;
 
@@ -63,6 +73,11 @@ WHERE
     E.EmployeeID IS NULL;
 
 --Question 3
+--Find Customers with Multiple Orders
+--Problem: Given a `Customers` table and an `Orders` table
+--where `Orders` contains a `CustomerID`,
+--find customers who have placed more than one order.
+
 CREATE TABLE Customers (
 CustomerID INT,
 Name VARCHAR(100)
@@ -103,7 +118,28 @@ HAVING
     COUNT(O.OrderID) > 1;
 
 --question 4
+--Find the Oldest and Youngest Employees
+--Problem: Given an `Employees` table
+--with columns `EmployeeID`, `Name`, and `DateOfBirth`,
+--find the oldest and youngest employees.
+
+
+create database testdb2;
+use testdb2;
+
+CREATE TABLE Employees (
+    EmployeeID INT,
+    Name VARCHAR(100),
+    DateOfBirth DATE
+);
+INSERT INTO Employees (EmployeeID, Name, DateOfBirth)
+VALUES
+(1, 'Alice Johnson', '1980-05-15'),
+(2, 'Bob Smith', '1990-12-01'),
+(3, 'Carol Brown', '1975-07-30'),
+(4, 'David Wilson', '1985-03-22');
 -- Finding the Oldest Employee
+
 SELECT 
     EmployeeID, 
     Name, 
@@ -124,6 +160,28 @@ WHERE
     DateOfBirth = (SELECT MAX(DateOfBirth) FROM Employees);
 
 --Question 5
+--Find the Total Number of Orders and Total Order Value by Customer
+--Problem: Given an `Orders` table,
+--find the total number of orders and
+--total order value for each customer.
+
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerID INT,
+    OrderDate DATE,
+    OrderValue DECIMAL(10, 2)
+);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, OrderValue)
+VALUES
+(1, 1, '2024-08-01', 150.00),
+(2, 1, '2024-08-05', 200.00),
+(3, 2, '2024-08-02', 75.00),
+(4, 3, '2024-08-03', 120.00),
+(5, 3, '2024-08-06', 180.00),
+(6, 3, '2024-08-07', 90.00);
+
+
 SELECT 
     CustomerID, 
     COUNT(OrderID) AS TotalOrders, 
