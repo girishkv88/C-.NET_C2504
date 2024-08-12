@@ -1,6 +1,6 @@
 using System;
 
-class Minnu
+class PatientAgeUsingArray
 {
     static void ReadPatientAgeTillBelowZero()
     {
