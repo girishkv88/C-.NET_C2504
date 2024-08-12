@@ -5,7 +5,7 @@ class PatientTemperatureUsingArray
     static void ReadPatientTemperatureTillZero()
     {
         // Initial array size
-        int initialSize = 10;
+        int initialSize = 100;
         int[] temperatures = new int[initialSize];
         int count = 0;
 
