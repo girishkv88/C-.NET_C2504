@@ -1,0 +1,154 @@
+1. use of parameterized constructor and non parameterized constructor
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPS1
+{     
+
+
+    class Movie
+    {
+        public int id;
+        public string name;
+        public Movie(int _id, string _name)
+        {
+            this.id = _id;
+            this.name = _name;
+        }
+        public Movie()
+        {
+            id = 0;
+            name = "";
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Movie manjummelBoys = new Movie(1001,"Manjummel boys");
+            Movie aavesham = new Movie();
+            aavesham.id = 1002;
+            aavesham.name = "avesham";
+            Console.WriteLine($"id={manjummelBoys.id},name={manjummelBoys.name}");
+            Console.WriteLine($"id={aavesham.id},name={aavesham.name}");
+            Console.ReadKey();
+
+        }
+    }
+}
+
+**********************************************************************************************************
+2.Bank class example
+PROGRAM:
+*****************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OopsProgram2
+{
+    class Account
+    {
+        public string Number { get; private set; } // Encapsulate the account number
+        private float balance;
+        public float Balance
+        {
+            get { return balance; }
+            private set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Balance cannot be negative. Operation canceled.");
+                    return;
+                }
+                if (value > 5000000)
+                {
+                    Console.WriteLine("Balance cannot be greater than 5000000. Operation canceled.");
+                    return;
+                }
+                balance = value;
+            }
+        }
+
+        public Account(string _number)
+        {
+            Number = _number;
+            Balance = 0;
+        }
+
+        public void Deposit(float amount)
+        {
+            if (amount > 500000)
+            {
+                Console.WriteLine("Cannot deposit more than 500,000 at once.");
+            }
+            else if (amount <= 0)
+            {
+                Console.WriteLine("Deposit amount must be positive.");
+            }
+            else
+            {
+                Balance += amount;
+                Console.WriteLine($"{amount} deposited. New balance: {Balance}");
+            }
+        }
+
+        public void Withdraw(float amount)
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Withdrawal amount must be positive.");
+            }
+            else if (amount > Balance)
+            {
+                Console.WriteLine("Insufficient balance. Withdrawal canceled.");
+            }
+            else
+            {
+                Balance -= amount;
+                Console.WriteLine($"{amount} withdrawn. New balance: {Balance}");
+            }
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Account girish = new Account("1233445566778");
+            girish.Deposit(600000);  // Valid deposit
+            girish.Deposit(300000);  // Valid deposit
+            girish.Withdraw(85000);  // Valid withdrawal
+            Console.WriteLine($"girish's account balance is {girish.Balance}");
+
+            girish.Withdraw(800000); // Should fail due to insufficient funds
+            girish.Withdraw(925000); // Should fail due to insufficient funds
+
+            girish.Deposit(1000001); // Should fail due to deposit limit
+            girish.Deposit(10000); // Valid deposit
+            //neha.Balance = 45;   error
+            Console.WriteLine($"girish's final account balance is {girish.Balance}");
+            Console.ReadKey();
+        }
+    }
+}
+
+OUTPUT:
+****************************
+Cannot deposit more than 500,000 at once.
+300000 deposited. New balance: 300000
+85000 withdrawn. New balance: 215000
+girish's account balance is 215000
+Insufficient balance. Withdrawal canceled.
+Insufficient balance. Withdrawal canceled.
+Cannot deposit more than 500,000 at once.
+10000 deposited. New balance: 225000
+girish's final account balance is 225000
+**********************************
