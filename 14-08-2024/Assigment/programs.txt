@@ -1,5 +1,5 @@
 ASSIGNMENT
-------------------------------------------------------------------------------------------------------------------------------------
+******************************************************************************************
 1.Rectangle Land Comparison Program using the concept of class,object and methods
 
 using System;
@@ -60,7 +60,7 @@ namespace OOPSRect
         }
     }
 }
------------------------------------------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
 2.Rectangle Land Comparison Program using the concept of class,object and methods(converting to properties and using this keyword)
 
 using System;
@@ -121,7 +121,8 @@ namespace OOPSRect
         }
     }
 }
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+
 
 3.Cricket Ground Boundry Sides Distances from batsman (from Pavilion End)
         Leg Side 
@@ -192,7 +193,8 @@ namespace OOPSCricket
     }
 }
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+
 4. Circle { Radius: int }
         - float Circumference() 
         - bool IsCircumferenceGt(Circle other)
@@ -252,7 +254,8 @@ namespace OOPSCircle
     }
 }
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+
 
 5. BikeRaceTrack
         { Distance: int }
@@ -309,7 +312,8 @@ namespace OOPSRace
         }
     }
 }
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+
 6. ComplexNumber { Real: int, Imaginary: int}
         - ComplexNumber Add(ComplexNumber other)
     TestComplexNumber for addition 
@@ -352,11 +356,9 @@ namespace OOPSComplexNos
         }
     }
 }
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-                                                                             TRAINERS DATABASE
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+**********************************************************************************************************
+                TRAINERS DATABASE
+**********************************************************************************************************
 I. Create Trainer
 
 
@@ -377,7 +379,7 @@ public void Create(Trainer trainer)
 1.how do you create the connection object?
        
 using (SqlConnection conn = new SqlConnection(connectionString))
-This line declares a SqlConnection object named conn and initializes it with a connection string (connectionString), which is a string that specifies the information needed to        connect to the database.
+This line declares a SqlConnection object named conn and initializes it with a connection string (connectionString), which is a string that specifies the information needed to  connect to the database.
 
 2.how do you create the command object?
 
