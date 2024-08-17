@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleTest
+namespace Interface_example
 {
     public class Prescription
     {
@@ -55,22 +55,54 @@ namespace SampleTest
             Prescription prescrip1 = new Prescription("RX001", 500);
             Prescription prescrip2 = new Prescription("RX002", 400);
 
-            Console.Write($"Prescription1 dosage {prescrip1.Dosage} equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
-            Console.WriteLine(prescrip1.Equals(prescrip2));
-            Console.Write($"Prescription1 dosage {prescrip1.Dosage} GreaterThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
-            Console.WriteLine(prescrip1.GreaterThan(prescrip2));
-            Console.Write($"Prescription1 dosage {prescrip1.Dosage} LessThan or Equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
-            Console.WriteLine(prescrip1.LessThanEquals(prescrip2));
-            Console.Write($"Prescription1 dosage {prescrip1.Dosage} Not Equals To Prescription2 Dosage {prescrip2.Dosage} is :   ");
-            Console.WriteLine(prescrip1.NotEquals(prescrip2));
-            Console.Write($"Prescription1 dosage {prescrip1.Dosage} LessThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
-            Console.WriteLine(prescrip1.LessThan(prescrip2));
+            if (prescrip1.Equals(prescrip2))
+            {
+                Console.WriteLine($"Prescription1 dosage {prescrip1.Dosage} equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
+            }
+            if (prescrip1.GreaterThan(prescrip2))
+            {
+                Console.WriteLine($"Prescription1 dosage {prescrip1.Dosage} GreaterThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
+            }
+            if (prescrip1.LessThanEquals(prescrip2))
+            {
+                Console.WriteLine($"Prescription1 dosage {prescrip1.Dosage} LessThan or Equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
+            }
+            if (prescrip1.NotEquals(prescrip2))
+            {
+                Console.WriteLine($"Prescription1 dosage {prescrip1.Dosage} Not Equals To Prescription2 Dosage {prescrip2.Dosage} is :   ");
+            }
+            if (prescrip1.LessThan(prescrip2))
+            {
+                Console.WriteLine($"Prescription1 dosage {prescrip1.Dosage} LessThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
+            }
+            /*
+                        Console.Write($"Prescription1 dosage {prescrip1.Dosage} equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
+                        Console.WriteLine(prescrip1.Equals(prescrip2));
+                        Console.Write($"Prescription1 dosage {prescrip1.Dosage} GreaterThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
+                        Console.WriteLine(prescrip1.GreaterThan(prescrip2));
+                        Console.Write($"Prescription1 dosage {prescrip1.Dosage} LessThan or Equals to Prescription2 Dosage {prescrip2.Dosage} is :   ");
+                        Console.WriteLine(prescrip1.LessThanEquals(prescrip2));
+                        Console.Write($"Prescription1 dosage {prescrip1.Dosage} Not Equals To Prescription2 Dosage {prescrip2.Dosage} is :   ");
+                        Console.WriteLine(prescrip1.NotEquals(prescrip2));
+                        Console.Write($"Prescription1 dosage {prescrip1.Dosage} LessThan Prescription2 Dosage {prescrip2.Dosage} is :   ");
+                        Console.WriteLine(prescrip1.LessThan(prescrip2));
+            */
         }
     }
 }
 
-
 /*OUTPUT
+ * Prescription1 dosage 500 GreaterThan Prescription2 Dosage 400 is :
+Prescription1 dosage 500 Not Equals To Prescription2 Dosage 400 is :
+Press any key to continue . . .
+
+ */
+
+
+
+
+
+/*OUTPUT2
  Prescription1 dosage 500 equals to Prescription2 Dosage 400 is :   False
 Prescription1 dosage 500 GreaterThan Prescription2 Dosage 400 is :   True
 Prescription1 dosage 500 LessThan or Equals to Prescription2 Dosage 400 is :   False
