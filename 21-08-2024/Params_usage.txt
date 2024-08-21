@@ -1,0 +1,33 @@
+
+ params USAGE
+**************************************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sampleprogram
+{
+    class Program
+    {
+        static void Add(params int[] numbers)
+        {
+            int sum = 0;
+            foreach (int number in numbers)
+            {
+                sum = sum + number;
+            }
+            Console.WriteLine(sum);
+        }
+        static void Main()
+        {
+            Add(1,2);   
+            Add(1,2,3);
+            Add(1,2,3,4,5,6,7,8,9,10);
+
+        }
+    }
+
+}
