@@ -1,0 +1,32 @@
+using System;
+
+class Person
+{
+    public string Name { get; set; } = "User 1";
+    public int Age { get; set; } = 25;
+
+    public void Show()
+    {
+        Console.WriteLine($"Name: {Name}, Age: {Age}");
+    }
+}
+
+class Student : Person
+{
+    new public void Show()
+    {
+        Console.WriteLine("This is the overridden Show method in Student class.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person();
+        person.Show(); // Calls the Show method from Person class
+
+        Student student = new Student();
+        student.Show(); // Calls the new Show method from Student class
+    }
+}
