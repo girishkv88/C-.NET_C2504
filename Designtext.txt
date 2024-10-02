@@ -35,6 +35,37 @@ A notification section that might list reminders or goal completion messages.
     <TextBlock Text="Notifications:" FontSize="16" Margin="10,20,10,0"/>
     <TextBox Name="NotificationArea" Width="300" Height="100" IsReadOnly="True"/>
 </StackPanel>
+2. Using Canvas:
+
+If you prefer absolute positioning with Canvas, you need to manually place each element by specifying coordinates.
+
+<Canvas Margin="10">
+    <!-- Title -->
+    <TextBlock Text="Set Health Goal" FontSize="20" Canvas.Left="10" Canvas.Top="10" />
+
+    <!-- Goal Type -->
+    <TextBlock Text="Goal Type:" Canvas.Left="10" Canvas.Top="50" />
+    <ComboBox Name="GoalType" Width="200" Canvas.Left="150" Canvas.Top="50">
+        <ComboBoxItem Content="Lower Blood Pressure"/>
+        <ComboBoxItem Content="Increase Daily Steps"/>
+        <ComboBoxItem Content="Weight Loss"/>
+    </ComboBox>
+
+    <!-- Goal Value -->
+    <TextBlock Text="Goal Value:" Canvas.Left="10" Canvas.Top="90" />
+    <TextBox Name="GoalValue" Width="200" Canvas.Left="150" Canvas.Top="90"/>
+
+    <!-- Set Goal Button -->
+    <Button Content="Set Goal" Width="100" Canvas.Left="150" Canvas.Top="130" Click="SetGoal_Click"/>
+
+    <!-- Progress Section -->
+    <TextBlock Text="Progress" FontSize="16" Canvas.Left="10" Canvas.Top="180"/>
+    <ProgressBar Name="GoalProgressBar" Width="300" Height="20" Canvas.Left="150" Canvas.Top="200"/>
+
+    <!-- Notifications Section -->
+    <TextBlock Text="Notifications:" FontSize="16" Canvas.Left="10" Canvas.Top="250"/>
+    <TextBox Name="NotificationArea" Width="300" Height="100" Canvas.Left="150" Canvas.Top="270" IsReadOnly="True"/>
+</Canvas>
 
 2. Device Integration/Sync Page
 
