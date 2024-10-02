@@ -1,0 +1,102 @@
+
+1. Health Goals and Progress Page
+
+Layout:
+
+A ComboBox to select the type of goal (e.g., weight loss, blood pressure).
+
+TextBox for setting specific goal values.
+
+A ProgressBar to show the progress toward the goal.
+
+Charts for visual representation of progress (e.g., LineChart for progress over time).
+
+A notification section that might list reminders or goal completion messages.
+
+
+<StackPanel>
+    <TextBlock Text="Set Health Goal" FontSize="20" />
+    <ComboBox Name="GoalType" Width="200">
+        <ComboBoxItem Content="Lower Blood Pressure"/>
+        <ComboBoxItem Content="Increase Daily Steps"/>
+        <ComboBoxItem Content="Weight Loss"/>
+    </ComboBox>
+    
+    <TextBlock Text="Goal Value:"/>
+    <TextBox Name="GoalValue" Width="200"/>
+
+    <Button Content="Set Goal" Width="100" Click="SetGoal_Click"/>
+
+    <TextBlock Text="Progress" FontSize="16" Margin="10,20,10,0"/>
+    <ProgressBar Name="GoalProgressBar" Width="300" Height="20"/>
+    
+    <!-- Add chart controls here for visual tracking -->
+    
+    <TextBlock Text="Notifications:" FontSize="16" Margin="10,20,10,0"/>
+    <TextBox Name="NotificationArea" Width="300" Height="100" IsReadOnly="True"/>
+</StackPanel>
+
+2. Device Integration/Sync Page
+
+Layout:
+
+A ListView to show the list of supported devices.
+
+A Button to trigger the sync process.
+
+A status message area to show whether the sync was successful or failed.
+
+Troubleshooting tips section in case of errors.
+
+
+<Grid>
+    <TextBlock Text="Supported Devices" FontSize="20" Margin="10"/>
+    <ListView Name="DeviceList" Width="300" Height="200">
+        <ListViewItem Content="Fitbit"/>
+        <ListViewItem Content="Apple Watch"/>
+        <ListViewItem Content="Google Fit"/>
+    </ListView>
+
+    <Button Content="Sync Now" Width="100" Click="SyncDevices_Click" Margin="10"/>
+    <TextBlock Text="Sync Status:" FontSize="16" Margin="10,20,10,0"/>
+    <TextBox Name="SyncStatus" Width="300" Height="30" IsReadOnly="True"/>
+
+    <TextBlock Text="Troubleshooting Tips:" FontSize="16" Margin="10,20,10,0"/>
+    <TextBox Name="TroubleshootingTips" Width="300" Height="100" IsReadOnly="True"/>
+</Grid>
+
+3. Profile Settings Page
+
+Layout:
+
+Fields to update personal information (name, age, gender, etc.).
+
+Checkboxes for notification preferences (e.g., enable/disable notifications).
+
+A section for password change and security options like two-factor authentication.
+
+
+<StackPanel>
+    <TextBlock Text="Profile Settings" FontSize="20" />
+    
+    <TextBlock Text="Name:" />
+    <TextBox Name="NameTextBox" Width="200"/>
+
+    <TextBlock Text="Age:" />
+    <TextBox Name="AgeTextBox" Width="200"/>
+
+    <TextBlock Text="Gender:" />
+    <ComboBox Name="GenderComboBox" Width="200">
+        <ComboBoxItem Content="Male"/>
+        <ComboBoxItem Content="Female"/>
+        <ComboBoxItem Content="Other"/>
+    </ComboBox>
+
+    <TextBlock Text="Notification Preferences:" Margin="10,20,0,0"/>
+    <CheckBox Content="Receive Email Notifications" Name="EmailNotificationsCheckBox"/>
+    <CheckBox Content="Receive Mobile Notifications" Name="MobileNotificationsCheckBox"/>
+
+    <TextBlock Text="Security" FontSize="16" Margin="10,20,0,0"/>
+    <Button Content="Change Password" Width="150" Click="ChangePassword_Click"/>
+    <Button Content="Enable Two-Factor Authentication" Width="200" Click="Enable2FA_Click"/>
+</StackPanel>
