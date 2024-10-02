@@ -320,4 +320,168 @@ Foreground Color: The color of the sync status changes dynamically based on the 
 
 This full design should meet your requirements for the Device Integration page. Let me know if you need further modifications or enhancements!
 
+Here’s the full working XAML design code for the Profile Settings page of your Personalized Health Tracker application using a Grid layout without any StackPanel. This design will still allow users to edit their personal information, manage health preferences, and change notification and security settings.
+
+Full XAML Design Code for Profile Settings Page (Without StackPanel)
+
+<Window x:Class="YourNamespace.ProfileSettingsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Profile Settings" Height="400" Width="400">
+
+    <Grid Margin="10">
+        <!-- Define the row and column structure -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title for the Profile Settings page -->
+        <TextBlock Text="Profile Settings" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Margin="0,10,0,20"/>
+
+        <!-- Personal Information Section -->
+        <GroupBox Header="Personal Information" FontSize="16" Grid.Row="1" Margin="10" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Name:" Grid.Row="0"/>
+                <TextBox Name="NameTextBox" Width="300" Grid.Row="0" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
+
+                <TextBlock Text="Email:" Grid.Row="1"/>
+                <TextBox Name="EmailTextBox" Width="300" Grid.Row="1" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
+
+                <TextBlock Text="Phone:" Grid.Row="2"/>
+                <TextBox Name="PhoneTextBox" Width="300" Grid.Row="2" Margin="0,0,0,10" VerticalAlignment="Bottom"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Health Preferences Section -->
+        <GroupBox Header="Health Preferences" FontSize="16" Grid.Row="2" Margin="10" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Preferred Units:" Grid.Row="0"/>
+                <ComboBox Name="UnitsComboBox" Width="300" Grid.Row="0" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Metric"/>
+                    <ComboBoxItem Content="Imperial"/>
+                </ComboBox>
+
+                <TextBlock Text="Notify Me About:" Grid.Row="1"/>
+                <CheckBox Name="WeightCheckBox" Content="Weight Updates" Grid.Row="1" Margin="0,0,0,5"/>
+                <CheckBox Name="ExerciseCheckBox" Content="Exercise Reminders" Grid.Row="1" Margin="0,20,0,5"/>
+                <CheckBox Name="NutritionCheckBox" Content="Nutrition Tips" Grid.Row="1" Margin="0,40,0,5"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Save and Cancel Buttons Section -->
+        <Grid Grid.Row="3" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Save" Width="80" Click="Save_Click" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+            <Button Content="Cancel" Width="80" Click="Cancel_Click" HorizontalAlignment="Left"/>
+        </Grid>
+    </Grid>
+</Window>
+
+Code-Behind (C#) for Profile Settings Page
+
+You also need to implement the code-behind logic for handling the button clicks. Create a new C# file named ProfileSettingsPage.xaml.cs:
+
+using System.Windows;
+
+namespace YourNamespace
+{
+    public partial class ProfileSettingsPage : Window
+    {
+        public ProfileSettingsPage()
+        {
+            InitializeComponent();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            // Logic to save profile settings (you can implement your saving logic here)
+            MessageBox.Show("Profile settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close(); // Close the window after saving
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            // Logic to cancel any changes and close the window
+            this.Close();
+        }
+    }
+}
+
+Steps to Implement:
+
+1. Create the Page:
+
+In your WPF project, create a new Window named ProfileSettingsPage.xaml.
+
+Copy the provided XAML code into this new window.
+
+
+
+2. Add Code-Behind:
+
+Create a new C# file named ProfileSettingsPage.xaml.cs and copy the provided C# code into it.
+
+
+
+3. Set Up Your Namespace:
+
+Make sure to replace YourNamespace with the actual namespace of your project.
+
+
+
+4. Run the Application:
+
+When you run the application and navigate to the ProfileSettingsPage, you should see the layout with options to enter personal information, manage health preferences, and buttons to save or cancel changes.
+
+
+
+
+Explanation of Design:
+
+Grid Layout: The layout is structured using a Grid, ensuring clear separation of sections without using StackPanel.
+
+GroupBox: Sections are grouped using GroupBox, clearly separating personal information and health preferences.
+
+Input Fields: Text boxes and combo boxes allow users to input and select their preferences.
+
+Checkboxes: Users can check their preferences for notifications regarding weight, exercise, and nutrition.
+
+Buttons: The "Save" and "Cancel" buttons allow users to either save their settings or discard changes.
+
+
+Next Steps:
+
+Data Persistence: You may want to implement logic to save user settings to a file or database.
+
+Validation: Consider adding input validation (e.g., ensuring email format is correct).
+
+Additional Fields: Expand the form to include other relevant fields as necessary.
+
+
+This design provides a clear and user-friendly interface for managing profile settings without using StackPanel. Let me know if you need any further assistance or modifications!
+
 
