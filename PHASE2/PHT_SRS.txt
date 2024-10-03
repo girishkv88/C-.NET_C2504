@@ -1,86 +1,116 @@
-(PHT)Personal Health Tracking.....SRSqns
-.............
-1. General Overview Questions
-
-Q1: What is the primary purpose of the Personalized Health Tracker?
-A1: The primary purpose of the Personalized Health Tracker is to help users monitor their daily health metrics, set personal health goals, track progress, and integrate data from wearable devices and health apps for personalized insights and notifications.
-
-Q2: Who are the primary users of the application?
-A2: The primary users are individuals interested in tracking and improving their health metrics, such as blood pressure, daily steps, weight, and other health goals. Healthcare professionals may also use it to monitor patients’ progress.
-
-Q3: What are the main features of the application?
-A3: The main features include:
-
-Health goal setting and progress tracking.
-
-Device integration and data synchronization with health apps.
-
-Profile settings for managing user information and preferences.
-
-Personalized health insights based on tracked data.
 
 
-2. Functional Requirements Questions
+General Questions
 
-Q4: How does the user set and track health goals?
-A4: Users can set specific health goals (e.g., lower blood pressure, increase daily steps) through the Health Goals page. The system will track the user’s progress, and visual indicators like progress bars or charts will display their status.
+1. Q: What is the main purpose of the "Personalized Health Tracker" application?
 
-Q5: What kind of notifications will users receive?
-A5: Users will receive notifications related to their health goals, such as reminders to complete tasks, updates when goals are achieved, and warnings when their health metrics are not improving. These notifications can be configured in the profile settings.
+A: The main purpose of the application is to monitor patients' daily health metrics (such as heart rate, blood pressure, and activity levels) and generate personalized health insights to help users track their well-being.
 
-Q6: How does the system integrate with external devices and apps?
-A6: The system provides a list of supported devices (e.g., wearables, smartwatches, fitness trackers) and apps. Users can sync their data, and the app will periodically update and display their health data from those devices. There are also troubleshooting options for syncing issues.
 
-3. Non-Functional Requirements Questions
 
-Q7: What are the performance expectations for the application?
-A7: The application is expected to handle real-time data from wearables and provide instant feedback to users. The user interface should remain responsive and load within 2-3 seconds, even with large amounts of data synced from external devices.
+2. Q: Which technologies are used to develop the application?
 
-Q8: How is the data security and privacy handled?
-A8: The application will employ encryption protocols to secure user health data. Users will have password protection for their profiles, and sensitive data (such as health metrics) will be stored securely, ensuring compliance with relevant data privacy regulations like HIPAA.
+A: The application is built using C#, WPF (Windows Presentation Foundation), and SQL Server for data storage and management.
 
-Q9: What platforms are supported for the Personalized Health Tracker?
-A9: The application is a desktop-based WPF app, primarily targeting Windows users. Future versions may extend support for mobile and web platforms based on user demand.
 
-4. Technical and Design Questions
 
-Q10: What technologies are used to build the Personalized Health Tracker?
-A10: The application is built using C#, WPF for the user interface, and SQL Server for storing user health data and profile information. Data synchronization with devices is handled through APIs provided by wearable manufacturers.
 
-Q11: How is the user interface designed for flexibility and responsiveness?
-A11: The UI uses a combination of Grid and Canvas layouts for flexibility. Elements such as health goals, progress indicators, and charts adjust dynamically to different screen sizes, ensuring a responsive user experience.
+User Features Questions
 
-Q12: What database structure is used for storing user data?
-A12: User data, including health metrics, goals, and progress, is stored in an SQL Server database. Each user has a profile, and their health metrics are recorded daily. Tables include Users, HealthMetrics, Goals, and DeviceSync.
+3. Q: What key features does the Home Page provide?
 
-5. Usability and User Interaction Questions
+A: The Home Page provides an introduction to the app, an overview of health tracking services, navigation links (login, sign-up, view insights), and buttons like "Get Started" or "Learn More."
 
-Q13: How does the application ensure ease of use for non-technical users?
-A13: The application features an intuitive, user-friendly interface with clear labels and easy navigation. Users can quickly set goals, check progress, and access device synchronization settings without needing advanced technical skills. Visual cues like charts and progress bars enhance understanding.
 
-Q14: How are errors or issues handled in the application?
-A14: The application includes error handling for syncing issues with devices, invalid data entries (such as incorrect goal values), and failed login attempts. Users will be presented with user-friendly error messages and suggestions for troubleshooting.
 
-6. Constraints and Assumptions Questions
+4. Q: How can users input their daily health metrics?
 
-Q15: What are the limitations of the current system?
-A15: The system currently supports only certain wearable devices and health apps, limiting users to specific brands or services. Future updates may expand this list. Additionally, the application is desktop-only, which restricts mobility.
+A: Users can manually input their daily health metrics through the Daily Health Metrics Entry Page or sync data from wearable devices like fitness trackers.
 
-Q16: What assumptions were made during the development of the system?
-A16: The system assumes that users will regularly update their health metrics either manually or through device sync. It also assumes that users have access to supported devices and apps for syncing their health data.
 
-7. Future Enhancements Questions
 
-Q17: What future enhancements are planned for the application?
-A17: Planned enhancements include support for additional wearable devices, mobile app integration, cloud-based data storage for access across multiple devices, and more advanced health insights powered by AI.
+5. Q: What type of health insights does the application generate?
 
-Q18: Will there be any integration with healthcare providers?
-A18: In future releases, the application may include integration with healthcare providers, allowing users to share their health data with doctors or receive professional recommendations based on their progress.
+A: The application generates personalized health insights based on the user’s data, including trends in health metrics, suggestions for improvement, and alerts for abnormal metrics.
 
-8. Testing and Validation Questions
 
-Q19: How will the application be tested to ensure functionality?
-A19: The application will undergo unit testing for each function, integration testing to ensure compatibility between modules (such as device sync and data storage), and user acceptance testing to validate that the system meets user needs and expectations.
 
-Q20: How will data synchronization be validated?
-A20: Data synchronization will be tested by simulating connections with supported devices. Tests will verify the accuracy and timeliness of data transfer, ensuring that the synced data reflects users' actual health metrics.
+
+Database and Technical Questions
+
+6. Q: What tables are included in the database schema for this application?
+
+A: The database includes several tables: Users, HealthMetrics, HealthInsights, Goals, DeviceSync, HealthHistory, and Notifications, each serving specific functions related to user data and health tracking.
+
+
+
+7. Q: How is user authentication handled in the application?
+
+A: User authentication is handled through a combination of email and hashed passwords stored in the Users table, along with options for social login (Google/Facebook).
+
+
+
+8. Q: What relationships exist between the database tables?
+
+A: There is a one-to-many relationship between the Users table and the HealthMetrics, HealthInsights, Goals, DeviceSync, HealthHistory, and Notifications tables, allowing each user to have multiple entries in these tables.
+
+
+
+
+Administrative Questions
+
+9. Q: What functionalities are available in the Admin Dashboard?
+
+A: The Admin Dashboard allows administrators to manage user data, monitor system performance, and analyze platform analytics such as user activity and health trends.
+
+
+
+10. Q: How does the application ensure data security?
+
+A: Data security is ensured through hashed passwords, user authentication processes, and secure storage practices in the database.
+
+
+
+
+User Goals and Progress Questions
+
+11. Q: How can users set and track their health goals?
+
+A: Users can set personal health goals on the Health Goals and Progress Page, where they can define target metrics, track progress visually, and receive notifications to meet their goals.
+
+
+
+12. Q: What options are available for viewing historical health data?
+
+A: Users can access the Health History Page to view a detailed history of all health metrics tracked over time, with filtering options to focus on specific metrics.
+
+
+
+
+Integration and Notifications Questions
+
+13. Q: How does the application handle integration with external devices?
+
+A: The Device Integration / Sync Page enables users to connect and sync data from compatible wearables and health apps, providing instructions and displaying syncing status.
+
+
+
+14. Q: What types of notifications are sent to users?
+
+A: Notifications include health alerts, reminders for medication intake, updates on health metrics, and insights based on user data.
+
+
+
+
+Feedback and Support Questions
+
+15. Q: What support options are available for users needing assistance?
+
+A: Users can access a Contact Support / Help Page that includes FAQs, a contact form for inquiries, and options for live chat or email support.
+
+
+
+
+Conclusion
+
+These questions and answers can serve as a useful reference for stakeholders, developers, and users to understand the features and requirements of the "Personalized Health Tracker" application. You can expand or modify these based on specific areas of focus or feedback received during the development process. If you need additional questions or have specific topics in mind, let me know!
