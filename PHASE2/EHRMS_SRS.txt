@@ -1,0 +1,150 @@
+Here are some questions and answers based on the Software Requirements Specification (SRS) for the Electronic Health Record (EHR) Management System:
+
+1. What is the purpose of the EHR Management System?
+
+Answer: The purpose of the EHR Management System is to provide healthcare institutions with a secure, cloud-based platform for managing patient medical records. It aims to streamline operations like patient registration, health record management, appointment scheduling, and billing while ensuring high data security and privacy standards.
+
+
+2. Who are the intended users of the system?
+
+Answer: The intended users include healthcare professionals such as doctors, nurses, lab technicians, and administrative staff, as well as system administrators. Additionally, patients can interact with the system through a dedicated patient portal.
+
+
+3. What are the core features of the EHR Management System?
+
+Answer: The core features include:
+
+User login and role-based access
+
+Patient registration and profile management
+
+EHR (Electronic Health Record) management
+
+Appointment scheduling
+
+Medication management
+
+Billing and insurance management
+
+Lab test result tracking
+
+Reporting and audit trail
+
+
+
+4. How does the system handle user authentication and security?
+
+Answer: The system implements a secure user login mechanism where user credentials (email and password) are hashed and verified against the database. Role-based access control (RBAC) is enforced, ensuring that each user can only access the functionalities permitted by their role (e.g., Doctor, Nurse, Admin). An audit trail logs all user activities for compliance and security.
+
+
+5. What is the significance of role-based access control (RBAC) in the system?
+
+Answer: Role-based access control ensures that each user type (Doctor, Nurse, Admin, Receptionist, etc.) can only access and modify data relevant to their role. For example, doctors can view and edit patient health records, while administrative staff can manage billing and insurance. This enhances data security and minimizes unauthorized access.
+
+
+6. How are patient records managed in the system?
+
+Answer: Patient records are managed through the EHR Records Management page, which allows healthcare providers to create, view, update, and delete patient health records. The records include diagnoses, treatments, medications, lab results, and doctor’s notes, ensuring a complete medical history for each patient.
+
+
+7. What happens when a new patient is registered in the system?
+
+Answer: When a new patient is registered, staff members input the patient’s demographic information (e.g., name, contact details, gender, medical history, allergies) into the system. This information is stored in the Patients table, creating a unique profile for the patient that can be accessed and updated by authorized personnel.
+
+
+8. How does the system handle appointment scheduling?
+
+Answer: The system allows healthcare professionals to schedule appointments with patients through the Appointment Scheduling Page. Users can select a patient, set the appointment date and time, and add any relevant notes. The status of appointments (Scheduled, Completed, or Canceled) is tracked, and upcoming appointments can trigger notifications.
+
+
+9. What are the types of reports the system can generate?
+
+Answer: The system can generate various reports such as:
+
+Patient treatment history reports
+
+Appointment logs
+
+Medication prescription reports
+
+Billing and insurance reports
+
+Administrative reports for tracking healthcare provider activities (audit trail)
+
+
+
+10. How does the system ensure data compliance and privacy?
+
+Answer: The system complies with healthcare data protection standards such as HIPAA. It ensures that patient data is encrypted, stored securely, and accessible only by authorized users. The audit trail feature tracks all actions within the system, and role-based access control limits data visibility to necessary parties only.
+
+
+11. Can patients access their health records?
+
+Answer: Yes, through the Patient Portal (if enabled), patients can log in and access their medical records, review past treatments, request prescription refills, and communicate with healthcare providers. This enhances transparency and patient engagement in their healthcare.
+
+
+12. How does the system manage medications and prescriptions?
+
+Answer: The Medication Management Page allows doctors to prescribe medications to patients by entering details like medication name, dosage, frequency, start date, and end date. Patients’ medication histories are tracked, and healthcare providers can modify prescriptions as needed.
+
+
+13. How is the billing process handled in the system?
+
+Answer: Billing is managed through the Billing and Insurance Page, where administrators can view patient invoices, track billing status (Pending, Paid, Canceled), and manage payment methods. The system also allows for the management of insurance claims and policies, ensuring accurate and transparent billing practices.
+
+
+14. What kind of database structure does the system use?
+
+Answer: The system is based on a relational database with tables such as Users, Patients, EHRRecords, Appointments, Medications, Billing, and AuditTrail. These tables are linked via foreign keys, ensuring referential integrity, and are designed to handle large volumes of patient and medical data efficiently.
+
+
+15. How does the system track changes or activities?
+
+Answer: The system uses an Audit Trail feature that logs all user activities, including record updates, login times, and appointment scheduling. This feature ensures accountability and helps in identifying unauthorized or unusual actions, thereby improving security and compliance.
+
+
+16. What are the optional features in the system?
+
+Answer: The optional features include:
+
+Telemedicine Integration: This allows healthcare providers to conduct remote consultations via video.
+
+Lab Results Tracking: Stores and displays patient lab test results within their health record.
+
+Patient Portal: A web or mobile interface that allows patients to access their records, request appointments, and manage prescriptions.
+
+
+
+17. What technologies are required to build this system?
+
+Answer: The system can be built using a cloud-based architecture with a web-based or desktop interface. It would typically involve:
+
+Frontend: Technologies like HTML, CSS, JavaScript, or a modern framework like React or Angular.
+
+Backend: Server-side technologies like ASP.NET, Java, or Node.js.
+
+Database: A relational database such as SQL Server or MySQL.
+
+Cloud Integration: Using cloud services for data storage and scalability (e.g., AWS, Microsoft Azure).
+
+Security: Integration with encryption libraries and secure authentication mechanisms (OAuth, JWT).
+
+
+
+18. What is the system’s approach to scalability?
+
+Answer: The system is designed to be cloud-based, allowing for scalability as the number of users, patients, and records grows. The database structure supports large volumes of data, and the system can be distributed across multiple servers or cloud environments to handle increased traffic or storage needs.
+
+
+19. How does the system ensure real-time data access?
+
+Answer: The system uses cloud-based storage and real-time synchronization for data access. Healthcare providers can access patient records, appointments, and lab results in real-time, ensuring that the most up-to-date information is always available for decision-making.
+
+
+20. What compliance standards does the system follow?
+
+Answer: The system adheres to healthcare data protection regulations such as HIPAA (Health Insurance Portability and Accountability Act). It ensures data encryption, audit trails, role-based access control, and secure data storage to protect patient confidentiality and ensure compliance with legal standards.
+
+
+These questions and answers provide an overview of the key aspects of the EHR Management System based on its SRS document.
+
