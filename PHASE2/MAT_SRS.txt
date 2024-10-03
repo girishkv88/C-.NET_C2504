@@ -1,0 +1,163 @@
+Medical Adherence Tracker
+
+1. What is the main objective of the Medication Adherence Tracker application?
+
+Answer:
+The main objective of the Medication Adherence Tracker application is to improve patient compliance with their prescribed medication regimens. The system provides reminders, medication schedules, adherence tracking, and check-ins to ensure patients take their medications on time and as prescribed.
+
+
+---
+
+2. Which core technologies are used in the development of the application?
+
+Answer:
+The application is built using WPF (Windows Presentation Foundation) for the UI, C# as the programming language, and SQL Server for data storage and management.
+
+
+---
+
+3. What are the key features of the application?
+
+Answer:
+The key features include:
+
+User Registration & Login: Patients can register and log into the application.
+
+Medication Management: Patients can add and manage medications with dose scheduling.
+
+Adherence Tracking: Track adherence to the medication schedule with visual reports and insights.
+
+Reminders & Check-ins: Automated reminders for medication intake and check-ins to confirm compliance.
+
+Reports & Analytics: Adherence reports over time with downloadable options.
+
+Optional Doctor Integration: Doctors can monitor patient adherence in real-time.
+
+
+
+---
+
+4. What is the purpose of the check-in feature in the application?
+
+Answer:
+The check-in feature allows patients to confirm that they have taken their medication at the scheduled time. This data is recorded to track adherence and generate reports for both patients and healthcare providers.
+
+
+---
+
+5. How does the application handle medication schedules?
+
+Answer:
+The application allows patients to input medication schedules, including the medication name, dosage, frequency, start and end dates. The system generates scheduled reminders for each dose and tracks whether the doses are taken or missed through the check-in feature.
+
+
+---
+
+6. How does the notification system work in the application?
+
+Answer:
+The notification system sends reminders to patients at scheduled times to take their medication. Notifications can be sent via in-app alerts, email, or SMS, depending on the user’s preferences. The system logs each notification and its delivery status.
+
+
+---
+
+7. What kind of reports does the Medication Adherence Tracker generate?
+
+Answer:
+The application generates adherence reports that show the percentage of doses taken on time versus missed or delayed doses. Reports can be visual (e.g., bar charts) and can also be exported as PDF or CSV files for review by healthcare providers or for patient records.
+
+
+---
+
+8. What database tables are involved in tracking patient adherence?
+
+Answer:
+Key tables include:
+
+Users Table: Stores patient information.
+
+Medications Table: Stores medication details for each patient.
+
+MedicationSchedules Table: Manages the schedule of when each medication should be taken.
+
+CheckIns Table: Records patient check-ins to track adherence.
+
+Reminders Table: Logs reminders sent to patients.
+
+
+
+---
+
+9. How does the system ensure the privacy and security of patient data?
+
+Answer:
+The system uses secure authentication methods to protect user accounts, including password hashing. All sensitive data is encrypted, and SQL Server ensures safe storage of patient records. Access to medical data is restricted to authorized users (patients and assigned doctors).
+
+
+---
+
+10. Can doctors or pharmacists monitor patient adherence through the app?
+
+Answer:
+Yes, there is an optional feature that allows doctors or pharmacists to monitor their patients' adherence remotely. Healthcare professionals can view adherence reports, modify medication schedules, and send custom notifications to patients.
+
+
+---
+
+11. What non-functional requirements are critical for the application?
+
+Answer:
+Some important non-functional requirements include:
+
+Performance: The application should handle multiple users and medication schedules without delay.
+
+Reliability: The system must reliably send reminders and track medication adherence.
+
+Usability: The user interface should be intuitive and accessible to patients of different technical skill levels.
+
+Scalability: The system should support an increasing number of users without a decline in performance.
+
+Security: User data must be protected through encryption and access controls.
+
+
+
+---
+
+12. How does the application handle missed doses?
+
+Answer:
+If a dose is missed, the system records it as such in the adherence tracking report. Patients can check-in late if they missed a reminder, but the adherence report will still show the delay. Doctors can use this data to monitor patient adherence more closely.
+
+
+---
+
+13. What are the possible future enhancements for the Medication Adherence Tracker?
+
+Answer:
+Possible future enhancements include:
+
+Integration with wearable devices for automatic check-ins based on patient activity.
+
+AI-powered adherence predictions to alert doctors if a patient is at risk of non-compliance.
+
+Advanced reporting features for more detailed insights into adherence patterns.
+
+Telemedicine features allowing patients to directly consult with healthcare providers through the app.
+
+
+
+---
+
+14. What is the ER diagram's main structure for the database?
+
+Answer:
+The ER diagram includes key entities such as:
+
+Users, Medications, MedicationSchedules, CheckIns, Reminders, Notifications, Doctors, and Doctor_Patient relationships. Each user can have multiple medications, each medication has multiple schedules, and schedules are linked to check-ins for adherence tracking.
+
+
+
+---
+
+These are sample questions and answers that can help you prepare for discussing the "Medication Adherence Tracker" project based on its SRF. Would you like to add or modify any of these questions?
+
