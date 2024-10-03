@@ -1,116 +1,82 @@
-
+Here are some potential questions and answers based on the Software Requirements Specification (SRS) for the "Personalized Health Tracker" application:
 
 General Questions
 
-1. Q: What is the main purpose of the "Personalized Health Tracker" application?
+1. Q: What is the primary purpose of the "Personalized Health Tracker" application?
+A: The primary purpose of the "Personalized Health Tracker" application is to monitor and manage users' daily health metrics, including heart rate, blood pressure, and activity levels, while generating personalized health insights to empower users in tracking their well-being.
 
-A: The main purpose of the application is to monitor patients' daily health metrics (such as heart rate, blood pressure, and activity levels) and generate personalized health insights to help users track their well-being.
 
+2. Q: What technologies are used in the development of the application?
+A: The application is developed using C#, WPF (Windows Presentation Foundation), and SQL Server for database management.
 
 
-2. Q: Which technologies are used to develop the application?
+3. Q: Who are the intended users of this application?
+A: The intended users include individuals interested in tracking their health metrics, setting health goals, and receiving personalized insights based on their data. This may include patients, fitness enthusiasts, and healthcare providers.
 
-A: The application is built using C#, WPF (Windows Presentation Foundation), and SQL Server for data storage and management.
 
 
+Functional Requirements
 
+4. Q: What features does the Home Page provide?
+A: The Home Page introduces the app, provides an overview of health tracking services, and includes navigation links for login, sign-up, and viewing insights, as well as buttons to get started or learn more.
 
-User Features Questions
 
-3. Q: What key features does the Home Page provide?
+5. Q: How can users input their daily health metrics?
+A: Users can input their daily health metrics manually through input fields on the Daily Health Metrics Entry Page or sync data from external wearable devices like fitness trackers.
 
-A: The Home Page provides an introduction to the app, an overview of health tracking services, navigation links (login, sign-up, view insights), and buttons like "Get Started" or "Learn More."
 
+6. Q: What type of insights does the Health Insights Page generate?
+A: The Health Insights Page generates personalized health insights based on user data, including trends, suggestions for improvement, and alerts for abnormal metrics.
 
 
-4. Q: How can users input their daily health metrics?
+7. Q: How can users set and track health goals in the application?
+A: Users can set health-related goals on the Health Goals and Progress Page, where they can define their objectives, track their progress visually, and receive notifications to help them stay on track.
 
-A: Users can manually input their daily health metrics through the Daily Health Metrics Entry Page or sync data from wearable devices like fitness trackers.
 
 
+Non-Functional Requirements
 
-5. Q: What type of health insights does the application generate?
+8. Q: What are the security measures implemented in the application?
+A: Security measures include user authentication via email and password, the option for social media logins, password hashing for storage, and the ability to enable two-factor authentication for account protection.
 
-A: The application generates personalized health insights based on the user’s data, including trends in health metrics, suggestions for improvement, and alerts for abnormal metrics.
 
+9. Q: How does the application ensure data scalability and efficient storage?
+A: The application uses SQL Server for database management, allowing for scalable data storage and efficient retrieval of health information as the user base grows.
 
 
 
-Database and Technical Questions
+Database and Data Management
 
-6. Q: What tables are included in the database schema for this application?
+10. Q: What information is stored in the Users Table?
+A: The Users Table stores user information, including unique identifiers, name, email, hashed password, date of birth, gender, and timestamps for account creation and updates.
 
-A: The database includes several tables: Users, HealthMetrics, HealthInsights, Goals, DeviceSync, HealthHistory, and Notifications, each serving specific functions related to user data and health tracking.
 
+11. Q: How does the application handle notifications for users?
+A: Notifications are managed through a dedicated Notifications Table, which stores details of alerts, reminders, and health insights sent to users, along with timestamps for when they were sent.
 
 
-7. Q: How is user authentication handled in the application?
+12. Q: What relationships exist between the different database tables?
+A: There are one-to-many relationships between the Users Table and other tables such as HealthMetrics, HealthInsights, Goals, DeviceSync, HealthHistory, and Notifications, allowing for comprehensive tracking of each user’s health data.
 
-A: User authentication is handled through a combination of email and hashed passwords stored in the Users table, along with options for social login (Google/Facebook).
 
 
+User Interaction
 
-8. Q: What relationships exist between the database tables?
+13. Q: What options are available for user registration?
+A: Users can register by providing their name, email, password, date of birth, and gender, and they also have the option to sign in using their Google or Facebook accounts.
 
-A: There is a one-to-many relationship between the Users table and the HealthMetrics, HealthInsights, Goals, DeviceSync, HealthHistory, and Notifications tables, allowing each user to have multiple entries in these tables.
 
+14. Q: How can users access their health history?
+A: Users can access their health history through the Health History Page, which displays a detailed record of past health metrics tracked over time, with options to filter and export data.
 
 
 
-Administrative Questions
+Support and Maintenance
 
-9. Q: What functionalities are available in the Admin Dashboard?
+15. Q: What support options are available for users needing assistance with the app?
+A: Users can access the Contact Support / Help Page, which provides FAQs, a contact form for inquiries, and options for live chat or email support for technical or health-related questions.
 
-A: The Admin Dashboard allows administrators to manage user data, monitor system performance, and analyze platform analytics such as user activity and health trends.
 
 
+These questions and answers cover various aspects of the SRS document, including the application's purpose, features, user interactions, database structure, security measures, and support options. Let me know if you need more questions or further details!
 
-10. Q: How does the application ensure data security?
-
-A: Data security is ensured through hashed passwords, user authentication processes, and secure storage practices in the database.
-
-
-
-
-User Goals and Progress Questions
-
-11. Q: How can users set and track their health goals?
-
-A: Users can set personal health goals on the Health Goals and Progress Page, where they can define target metrics, track progress visually, and receive notifications to meet their goals.
-
-
-
-12. Q: What options are available for viewing historical health data?
-
-A: Users can access the Health History Page to view a detailed history of all health metrics tracked over time, with filtering options to focus on specific metrics.
-
-
-
-
-Integration and Notifications Questions
-
-13. Q: How does the application handle integration with external devices?
-
-A: The Device Integration / Sync Page enables users to connect and sync data from compatible wearables and health apps, providing instructions and displaying syncing status.
-
-
-
-14. Q: What types of notifications are sent to users?
-
-A: Notifications include health alerts, reminders for medication intake, updates on health metrics, and insights based on user data.
-
-
-
-
-Feedback and Support Questions
-
-15. Q: What support options are available for users needing assistance?
-
-A: Users can access a Contact Support / Help Page that includes FAQs, a contact form for inquiries, and options for live chat or email support.
-
-
-
-
-Conclusion
-
-These questions and answers can serve as a useful reference for stakeholders, developers, and users to understand the features and requirements of the "Personalized Health Tracker" application. You can expand or modify these based on specific areas of focus or feedback received during the development process. If you need additional questions or have specific topics in mind, let me know!
