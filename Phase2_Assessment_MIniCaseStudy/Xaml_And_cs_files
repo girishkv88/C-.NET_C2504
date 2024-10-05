@@ -1,0 +1,515 @@
+AccountListWindow.xaml
+______________________________________________________________________________________________________________________
+<Window x:Class="BankAccountManagementSample.AccountListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankAccountManagementSample"
+        mc:Ignorable="d"
+        Title="Account List Window" Height="450" Width="940" Closed="Window_Closed">
+    <Grid MaxWidth="1200" Margin="0,10,15,59">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="ACCOUNT LIST" TextAlignment="Center" FontWeight="Bold" FontSize="22"/>
+        <Button x:Name="btnCreate" Grid.Row="1" Content="Create" Width="100" HorizontalAlignment="Left"  Margin="10,0,0,0" Height="30" Background="#FF34BFEE" Click="btnCreate_Click"/>
+        <Button x:Name="btnEdit" Grid.Row="1" Content="Edit" Width="100" HorizontalAlignment="Left"  Margin="150,0,0,5" Height="30" Background="#FF34BFEE"/>
+        <DataGrid x:Name="grdAccounts" Grid.Row="2" AutoGenerateColumns= "False" Margin="10,14,0,10" Background="{x:Null}"  IsReadOnly="True" AreRowDetailsFrozen="True" SelectionMode="Single" SelectedItem="{Binding SelectedAccount , Mode=TwoWay}" ItemsSource="{Binding Accounts}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="AccountNumber" Binding="{Binding AccountNumber}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Balance" Binding="{Binding Balance}"/>
+                <DataGridTextColumn Header="Acc Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="AccountNumber" Binding="{Binding AccountNumber}"/>
+                <DataGridTextColumn Header="IsActive" Binding="{Binding IsActive}"/>
+                <DataGridTextColumn Header="InterestPercentage" Binding="{Binding InterestPercentage}"/>
+                <DataGridTextColumn Header="Transaction Count" Binding="{Binding TransactionCount}"/>
+                <DataGridTextColumn Header="Last Transaction Date" Binding="{Binding LastTransactionDate}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button x:Name="btnWithdraw" Grid.Row="3" Content="Withdraw" Width="100" HorizontalAlignment="Left"  Margin="10,0,0,0" Height="30"/>
+        <Button x:Name="btnDeposite" Grid.Row="3" Content="Deposit" Width="100" HorizontalAlignment="Left"  Margin="147,4,0,1" Height="30"/>
+        <Button Grid.Row="3" Content="Calculate Interest and Upadate Amount" Width="230" HorizontalAlignment="Left"  Margin="300,0,0,0" Height="30"/>
+        
+    </Grid>
+</Window>
+______________________________________________________________________________________________________________________
+AccountListWindow.xaml.cs
+_______________________________________________________________________________________________________________________
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace BankAccountManagementSample
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class AccountListWindow : Window
+    {
+        public AccountListWindow()
+        {
+            InitializeComponent();
+            this.DataContext = AccountConfig.accountViewModel;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+           AccountConfig.newAccountWindow.Show();
+        }
+    }
+}
+
+
+________________________________________________________________________________________________________________________
+NewAccountWindow.xaml
+_______________________________________________________________________________________________________________________
+<Window x:Class="BankAccountManagementSample.NewAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankAccountManagementSample"
+        mc:Ignorable="d"
+        Title="NewAccountWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Grid MaxWidth="1200" Margin="0 10 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" TextAlignment="center" Text="New Account"
+                   FontSize="22" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 10 0 0">
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Account Number"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.AccountNumber}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Name"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Name}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Balance" />
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Balance}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Type"/>
+                <RadioButton Content="current"  Margin="100 0 0 0" />
+                <RadioButton Content="savings"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Email"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Email}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Phone"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.PhoneNumber}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Address"/>
+                <TextBox  Width="300" Margin="100 0 0 0" Text="{Binding NewAccount.Address}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="IsActive"/>
+                <CheckBox Content="" Margin="100 0 0 0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Interest Percentage"/>
+                <ComboBox Margin="100 0 0 0">
+                    <ComboBoxItem Content="5%"/>
+                    <ComboBoxItem Content="10%"/>
+                    <ComboBoxItem Content="15%"/>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Transaction Count"/>
+                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding NewAccount.TransactionCount}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                <TextBlock Width="150" Text="Last Transaction Date"/>
+                <TextBox Width="300" IsEnabled="False" Margin="100 0 0 0" Text="{Binding NewAccount.LastTransactionDate}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button x:Name="btnSave" HorizontalAlignment="center" Grid.Row="2" Width="200" Background="Bisque" Content="Save" Foreground="Black" FontWeight="bold"
+                Height="50"
+                Margin="0 10 20 20"
+                Command="{Binding CreateCommand}"/>
+
+    </Grid>
+</Window>
+
+_______________________________________________________________________________________________________________________
+NewAccountWindow.xaml.cs
+_______________________________________________________________________________________________________________________
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace BankAccountManagementSample
+{
+    /// <summary>
+    /// Interaction logic for NewAccountWindow.xaml
+    /// </summary>
+    public partial class NewAccountWindow : Window
+    {
+        public NewAccountWindow()
+        {
+            InitializeComponent();
+            this.DataContext = AccountConfig.accountViewModel;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+AccountModel.cs
+__________________________
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAccountManagementSample
+{
+    public class AccountModel
+    {
+        public int AccountNumber { get; set; }
+        public string Name { get; set; }
+        public Decimal Balance { get; set; }
+        public string Type { get; set; }
+        public String Email { get; set; }
+        public String PhoneNumber { get; set; }
+        public String Address { get; set; }
+        public bool IsActive { get; set; }
+        public int InterestPercentage { get; set; }
+        public int TransactionCount { get; set; }
+        public DateTime LastTransactionDate { get; set; }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+IAccountRepo.cs
+_____________________________
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAccountManagementSample
+{
+    public interface IAccountRepo
+    {
+        void Create(AccountModel account);
+        void Update( int accNo ,AccountModel account );
+        void Delete( int accNo, AccountModel account );
+        void Deposit(int acNo, int Amount);
+        void Withdraw(int acNo, int Amount);
+        void CalculateInterestAndUpdateBalance();
+        ObservableCollection<AccountModel> ReadAllAccount();
+
+    }
+}
+
+_______________________________________________________________________________________________________________________
+AccountMemoryRepo.cs
+_____________________________
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAccountManagementSample
+{
+    public class AccountMemoryRepo : IAccountRepo
+    {
+
+        public ObservableCollection<AccountModel> accounts = new ObservableCollection<AccountModel>()
+        {
+        new AccountModel
+            {
+                AccountNumber = 243643,
+                Name = "Girish",
+                Balance = 0,
+                Type = "savings",
+                Email = "girish@gmail.com",
+                PhoneNumber = "775577799",
+                Address = "djkdnfsdkjfs",
+                IsActive = true,
+                InterestPercentage = 0,
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+
+
+            },
+        new AccountModel
+            {
+                AccountNumber = 5427782,
+                Name = "Anurag",
+                Balance = 0,
+                Type = "savings",
+                Email = "anurag@gmail.com",
+                PhoneNumber = "7875772",
+                Address = "bhdjaldjhk",
+                IsActive = true,
+                InterestPercentage = 0,
+                TransactionCount = 0,
+                LastTransactionDate = DateTime.Now,
+            },
+        };
+        public void CalculateInterestAndUpdateBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Create(AccountModel account)
+        {
+            
+            accounts.Add(account);
+        }
+
+        public void Delete(int accNo, AccountModel account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deposit(int acNo, int Amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<AccountModel> ReadAllAccount()
+        {
+            return accounts;
+        }
+
+        public void Update(int accNo, AccountModel account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Withdraw(int acNo, int Amount)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+AccountViewModel.cs
+______________________
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Security.Principal;
+using System.Security.RightsManagement;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+namespace BankAccountManagementSample
+{
+    public class AccountViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private AccountModel _newAccount = null;
+        public AccountModel NewAccount
+        {
+            get { return _newAccount = null; }
+            set { _newAccount = value; 
+                OnPropertyChanged(nameof(NewAccount)); } 
+        }
+
+        private AccountModel _selectesAccount = null;
+        public AccountModel SelectedAccount
+        {
+            get { return _selectesAccount; }
+            set { _selectesAccount = value; OnPropertyChanged(nameof(NewAccount)); }
+        }
+
+        private IAccountRepo _accountRepo = new AccountMemoryRepo();
+
+        public void Create()
+        {
+            AccountModel account = new AccountModel
+            {
+                AccountNumber = NewAccount.AccountNumber,
+                Name = NewAccount.Name,
+                Balance = NewAccount.Balance,
+                Type = NewAccount.Type,
+                Email = NewAccount.Email,
+                PhoneNumber = NewAccount.PhoneNumber,
+                Address = NewAccount.Address,
+                IsActive = NewAccount.IsActive,
+                InterestPercentage = NewAccount.InterestPercentage,
+                TransactionCount = NewAccount.TransactionCount,
+                LastTransactionDate = NewAccount.LastTransactionDate,
+            };
+
+            _accountRepo.Create(account);
+        }   
+
+        public ObservableCollection<AccountModel> Accounts { get { return _accountRepo.ReadAllAccount(); } }
+
+        public ICommand CreateCommand { get; }
+        public ICommand UpdateCommand { get; }
+
+        public AccountViewModel()
+        {
+            CreateCommand = new RelayCommand(Create);
+            //UpdateCommand = new RelayCommand(Update);
+        }
+
+
+
+    }
+   
+
+}
+
+_______________________________________________________________________________________________________________________
+RelayCommand.cs
+______________________
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+namespace BankAccountManagementSample
+{
+    public class RelayCommand : ICommand
+    {
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
+
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+        //
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        //
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+AccountConfig.cs
+______________________
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAccountManagementSample
+{
+    public static class AccountConfig
+    {
+        public static NewAccountWindow newAccountWindow = null;
+        //public static EditAccountWindow editAccountWindow = null;
+        public static AccountViewModel accountViewModel = null;
+        static AccountConfig()
+        {
+            accountViewModel = new AccountViewModel();
+            //editAccountWindow = new EditAccountWindow();
+            newAccountWindow = new NewAccountWindow();
+
+
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+App.xaml
+______________________
+<Application x:Class="BankAccountManagementSample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BankAccountManagementSample"
+             StartupUri="AccountListWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
