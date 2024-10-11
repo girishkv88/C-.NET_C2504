@@ -1,0 +1,96 @@
+To create the complete setup, including SQL scripts for creating and populating the database, follow these steps:
+
+1. Create the Database in SQL Server:
+
+First, create the database where you will store the manufacturing data.
+
+
+CREATE DATABASE ManufacturingDB;
+GO
+
+2. Create the Table to Store Manufacturing Data:
+
+Once the database is created, you need a table to store the manufacturing data.
+
+
+USE ManufacturingDB;
+GO
+
+CREATE TABLE ManufacturingData (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Date DATETIME NOT NULL,
+    ProductionCount INT NOT NULL,
+    Efficiency FLOAT NOT NULL
+);
+GO
+
+3. Insert Sample Data into the Table:
+
+Insert sample records into the table for testing your WPF application.
+
+
+INSERT INTO ManufacturingData (Date, ProductionCount, Efficiency)
+VALUES 
+    ('2024-01-01', 500, 89.5),
+    ('2024-01-02', 450, 85.0),
+    ('2024-01-03', 470, 87.3),
+    ('2024-01-04', 510, 91.2),
+    ('2024-01-05', 480, 88.7),
+    ('2024-01-06', 520, 92.1);
+GO
+
+4. SQL Query for Retrieving Data:
+
+The SQL query used in your C# code will retrieve the records from this table:
+
+
+SELECT Date, ProductionCount, Efficiency FROM ManufacturingData;
+
+5. Updated Data Retrieval Method in C#:
+
+Here’s the ADO.NET code (from the previous example) for fetching the data from SQL Server:
+
+
+public List<ManufacturingData> GetData()
+{
+    var data = new List<ManufacturingData>();
+
+    string query = "SELECT Date, ProductionCount, Efficiency FROM ManufacturingData";
+    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ManufacturingDB"].ConnectionString))
+    {
+        conn.Open();
+        using (SqlCommand cmd = new SqlCommand(query, conn))
+        {
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                data.Add(new ManufacturingData
+                {
+                    Date = reader.GetDateTime(0),
+                    ProductionCount = reader.GetInt32(1),
+                    Efficiency = reader.GetDouble(2)
+                });
+            }
+        }
+    }
+
+    return data;
+}
+
+Summary:
+
+1. Create the ManufacturingDB database.
+
+
+2. Add the ManufacturingData table.
+
+
+3. Insert some sample data.
+
+
+4. Use the SQL query in your WPF application to retrieve the data.
+
+
+
+Now you have everything you need: the database, table, sample data, and C# code to retrieve and display the data in a WPF application with interactive charts.
+
