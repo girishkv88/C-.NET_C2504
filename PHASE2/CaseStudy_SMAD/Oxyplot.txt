@@ -78,3 +78,158 @@ Add more plots, labels, legends, or axis customization as per your manufacturing
 
 
 Let me know if you'd like further customization or help with connecting the data source!
+
+
+
+To implement the project using OxyPlot and follow the MVVM pattern, here's an outline:
+
+1. Create a WPF Project
+
+In Visual Studio, create a new WPF App (.NET Core or .NET Framework) project.
+
+
+2. Install OxyPlot
+
+In the NuGet Package Manager, install the OxyPlot.Wpf package.
+
+
+3. Create the Project Structure
+
+To follow the MVVM pattern, you should organize your project into Model, ViewModel, and View folders.
+
+Model: Holds the data representation (e.g., manufacturing data).
+
+ViewModel: Handles the logic, data binding, and interaction with the view.
+
+View: The UI part (XAML).
+
+
+4. Model (ManufacturingData.cs)
+
+Create a class to represent the manufacturing unit data.
+
+namespace ManufacturingGraph.Model
+{
+    public class ManufacturingData
+    {
+        public int Time { get; set; }      // Could represent time (e.g., days, hours, etc.)
+        public double UnitsProduced { get; set; }
+    }
+}
+
+5. ViewModel (MainViewModel.cs)
+
+This will contain the logic to prepare the data for the graph.
+
+using OxyPlot;
+using OxyPlot.Series;
+using System.Collections.ObjectModel;
+
+namespace ManufacturingGraph.ViewModel
+{
+    public class MainViewModel : ViewModelBase
+    {
+        public PlotModel ManufacturingPlot { get; set; }
+        public ObservableCollection<Model.ManufacturingData> ManufacturingData { get; set; }
+
+        public MainViewModel()
+        {
+            // Initialize collection
+            ManufacturingData = new ObservableCollection<Model.ManufacturingData>
+            {
+                new Model.ManufacturingData { Time = 1, UnitsProduced = 200 },
+                new Model.ManufacturingData { Time = 2, UnitsProduced = 250 },
+                new Model.ManufacturingData { Time = 3, UnitsProduced = 300 },
+                new Model.ManufacturingData { Time = 4, UnitsProduced = 400 },
+                new Model.ManufacturingData { Time = 5, UnitsProduced = 450 }
+            };
+
+            // Create Plot Model
+            ManufacturingPlot = new PlotModel { Title = "Manufacturing Unit Production" };
+            var series = new LineSeries
+            {
+                Title = "Units Produced",
+                MarkerType = MarkerType.Circle
+            };
+
+            // Bind data to the plot
+            foreach (var data in ManufacturingData)
+            {
+                series.Points.Add(new DataPoint(data.Time, data.UnitsProduced));
+            }
+
+            ManufacturingPlot.Series.Add(series);
+        }
+    }
+}
+
+6. ViewModelBase.cs
+
+Create a base class to implement INotifyPropertyChanged (this helps with data binding).
+
+using System.ComponentModel;
+
+namespace ManufacturingGraph.ViewModel
+{
+    public class ViewModelBase : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}
+
+7. View (MainWindow.xaml)
+
+In MainWindow.xaml, bind the view to the MainViewModel and display the OxyPlot chart.
+
+<Window x:Class="ManufacturingGraph.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:local="clr-namespace:ManufacturingGraph"
+        mc:Ignorable="d"
+        Title="Manufacturing Graph" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <oxy:PlotView Model="{Binding ManufacturingPlot}" />
+    </Grid>
+</Window>
+
+8. MainWindow.xaml.cs
+
+You don’t need much here because the ViewModel will handle the logic. It can remain as the default.
+
+namespace ManufacturingGraph
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+9. Run the Application
+
+The application will display a line graph with the production units over time. The MainViewModel binds the data to the view, following the MVVM structure.
+
+
+10. Future Enhancements
+
+You can replace the hardcoded ObservableCollection in MainViewModel with data loaded from a file or database.
+
+Add interaction, filtering, or different chart types (bar chart, pie chart) as needed for your manufacturing dashboard.
+
+
+This structure separates concerns and follows the MVVM pattern, which is ideal for maintainable WPF applications. Let me know if you need help with additional features!
+
