@@ -233,3 +233,155 @@ Build and run the WPF application. You should see an interactive chart with the 
 
 This setup allows you to create a simple visualization page that displays production counts and efficiency over time. You can expand this by adding more interactivity, such as filtering by date range or selecting different data metrics to display.
 
+
+To start by using inbuilt data from a file for visualization in your WPF project, follow these steps:
+
+1. Store Data in a JSON or CSV File:
+
+Let's assume you're using a JSON file to store manufacturing data, which can later be parsed and used in your WPF application.
+
+
+Sample JSON File (manufacturingData.json):
+
+[
+    {
+        "Date": "2024-01-01",
+        "ProductionCount": 500,
+        "Efficiency": 89.5
+    },
+    {
+        "Date": "2024-01-02",
+        "ProductionCount": 450,
+        "Efficiency": 85.0
+    },
+    {
+        "Date": "2024-01-03",
+        "ProductionCount": 470,
+        "Efficiency": 87.3
+    },
+    {
+        "Date": "2024-01-04",
+        "ProductionCount": 510,
+        "Efficiency": 91.2
+    },
+    {
+        "Date": "2024-01-05",
+        "ProductionCount": 480,
+        "Efficiency": 88.7
+    }
+]
+
+2. Create a Model to Represent Manufacturing Data:
+
+This class will map the data structure from the JSON file.
+
+
+public class ManufacturingData
+{
+    public DateTime Date { get; set; }
+    public int ProductionCount { get; set; }
+    public double Efficiency { get; set; }
+}
+
+3. Read Data from the JSON File:
+
+Use System.Text.Json or Newtonsoft.Json to deserialize the JSON file into a list of ManufacturingData.
+
+
+First, add the Newtonsoft.Json package via NuGet if necessary: Install-Package Newtonsoft.Json.
+
+Then, update your code to read the JSON file and convert it into C# objects.
+
+using Newtonsoft.Json;
+using System.IO;
+
+public List<ManufacturingData> GetDataFromFile()
+{
+    var filePath = "manufacturingData.json"; // Specify the path to your JSON file
+    var jsonData = File.ReadAllText(filePath);
+    return JsonConvert.DeserializeObject<List<ManufacturingData>>(jsonData);
+}
+
+4. Set Up Visualization in WPF:
+
+Bind the data to a chart in the MainWindow.xaml as you did before using LiveCharts.
+
+
+MainWindow.xaml:
+
+<Window x:Class="ManufacturingDataVisualization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="Manufacturing Data" Height="450" Width="800">
+    <Grid>
+        <lvc:CartesianChart Name="manufacturingChart">
+            <lvc:CartesianChart.Series>
+                <lvc:LineSeries Title="Production Count" Values="{Binding ProductionCounts}" />
+                <lvc:LineSeries Title="Efficiency" Values="{Binding Efficiencies}" />
+            </lvc:CartesianChart.Series>
+        </lvc:CartesianChart>
+    </Grid>
+</Window>
+
+5. Bind the Data in the Code-Behind:
+
+In MainWindow.xaml.cs, load the data from the file and bind it to the chart.
+
+
+public partial class MainWindow : Window
+{
+    public ChartValues<int> ProductionCounts { get; set; }
+    public ChartValues<double> Efficiencies { get; set; }
+
+    public MainWindow()
+    {
+        InitializeComponent();
+        LoadData();
+        DataContext = this;
+    }
+
+    private void LoadData()
+    {
+        var data = GetDataFromFile(); // Get the data from the JSON file
+
+        ProductionCounts = new ChartValues<int>();
+        Efficiencies = new ChartValues<double>();
+
+        foreach (var record in data)
+        {
+            ProductionCounts.Add(record.ProductionCount);
+            Efficiencies.Add(record.Efficiency);
+        }
+    }
+
+    private List<ManufacturingData> GetDataFromFile()
+    {
+        // Read data from the JSON file
+        var filePath = "manufacturingData.json"; // Ensure the file is in the correct location
+        var jsonData = File.ReadAllText(filePath);
+        return JsonConvert.DeserializeObject<List<ManufacturingData>>(jsonData);
+    }
+}
+
+6. Add the JSON File to Your Project:
+
+Place the manufacturingData.json file in your project directory.
+
+In Visual Studio, right-click on the file in the Solution Explorer, go to Properties, and set Copy to Output Directory to Copy always so that the file is always available when the application runs.
+
+
+7. Run the Application:
+
+Build and run your WPF application. The manufacturing data from the JSON file will be loaded and displayed on the chart.
+
+
+8. Next Step:
+
+Once this is working, you can later replace the file-based data with data retrieved from a SQL Server database by adjusting the GetData() method (as described previously).
+
+
+By starting with inbuilt data in a file, you can easily visualize your manufacturing data before moving on to database integration.
+
+
+
