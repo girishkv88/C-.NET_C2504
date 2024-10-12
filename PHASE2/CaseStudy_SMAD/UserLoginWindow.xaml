@@ -1,0 +1,39 @@
+<Window x:Class="SmartManufacturingDashboard.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="400" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Text="Smart Manufacturing Dashboard" 
+                   FontSize="18" 
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" 
+                   Margin="0,20,0,10"/>
+
+        <!-- Login Form -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <TextBlock Text="Username" Margin="0,10,0,5"/>
+            <TextBox x:Name="UsernameTextBox" Width="200" />
+
+            <TextBlock Text="Password" Margin="0,20,0,5"/>
+            <PasswordBox x:Name="PasswordBox" Width="200" />
+
+            <Button Content="Login" Width="200" Margin="0,20,0,0" 
+                    Command="{Binding LoginCommand}" 
+                    IsDefault="True"/>
+
+            <!-- Error Message -->
+            <TextBlock Text="{Binding ErrorMessage}" 
+                       Foreground="Red" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Visibility="{Binding ErrorMessageVisibility}"
+                       Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
