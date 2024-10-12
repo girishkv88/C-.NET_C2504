@@ -210,8 +210,8 @@ Copy code
         Height="600"
         Width="800"
         WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource WindowBackgroundColor}">
-    
+        Background="{StaticResource WindowBackgroundColor}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -219,12 +219,12 @@ Copy code
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <StackPanel Orientation="Vertical" Background="{DynamicResource HeaderBackgroundColor}" Padding="10">
+        <StackPanel Orientation="Vertical" Background="{StaticResource HeaderBackgroundColor}" Padding="10">
             <TextBlock Text="Alerts and Notifications" 
-                       Style="{DynamicResource HeaderTextStyle}" 
+                       Style="{StaticResource HeaderTextStyle}" 
                        HorizontalAlignment="Center" />
             <TextBlock Text="Stay updated with real-time alerts." 
-                       Style="{DynamicResource SubHeaderTextStyle}" 
+                       Style="{StaticResource SubHeaderTextStyle}" 
                        HorizontalAlignment="Center" />
         </StackPanel>
 
@@ -232,8 +232,8 @@ Copy code
         <ListView Grid.Row="1"
                   ItemsSource="{Binding Alerts}"
                   Margin="10"
-                  Background="{DynamicResource ListBackgroundColor}"
-                  BorderBrush="{DynamicResource ListBorderBrush}"
+                  Background="{StaticResource ListBackgroundColor}"
+                  BorderBrush="{StaticResource ListBorderBrush}"
                   BorderThickness="1"
                   AlternationCount="2"
                   ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -246,7 +246,7 @@ Copy code
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Status}" 
-                                           Style="{DynamicResource StatusTextStyle}" 
+                                           Style="{StaticResource StatusTextStyle}" 
                                            Foreground="{Binding StatusColor}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -262,14 +262,15 @@ Copy code
                     VerticalAlignment="Bottom" 
                     Margin="10">
             <Button Content="Acknowledge All" 
-                    Style="{DynamicResource PrimaryButtonStyle}" 
+                    Style="{StaticResource PrimaryButtonStyle}" 
                     Margin="5"/>
             <Button Content="Settings" 
-                    Style="{DynamicResource SecondaryButtonStyle}" 
+                    Style="{StaticResource SecondaryButtonStyle}" 
                     Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>
+
 Style Resource Dictionary
 Here’s a separate style resource dictionary to apply a theme to your Alerts and Notifications Page. You can save this as Styles.xaml and include it in your project.
 
