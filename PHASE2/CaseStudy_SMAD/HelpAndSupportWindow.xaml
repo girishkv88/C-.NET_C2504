@@ -97,3 +97,20 @@
         </ScrollViewer>
     </Grid>
 </Window>
+
+
+
+
+ <Grid>
+                        <TextBox x:Name="txtName" Margin="0,5" />
+                        <TextBlock Text="Your Name" Foreground="Gray" Margin="5,5,0,0" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding ElementName=txtName, Path=Text.Length, Converter={StaticResource LengthToVisibilityConverter}}"/>
+                    </Grid>
+                    <Grid>
+                        <TextBox x:Name="txtEmail" Margin="0,5" />
+                        <TextBlock Text="Your Email" Foreground="Gray" Margin="5,5,0,0" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding ElementName=txtEmail, Path=Text.Length, Converter={StaticResource LengthToVisibilityConverter}}"/>
+                    </Grid>
+                    <Grid>
+                        <TextBox x:Name="txtMessage" Height="80" Margin="0,5" />
+                        <TextBlock Text="Your Message" Foreground="Gray" Margin="5,5,0,0" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding ElementName=txtMessage, Path=Text.Length, Converter={StaticResource LengthToVisibilityConverter}}"/>
+                    </Grid>
+                    <Button Content="Submit" Style="{StaticResource PrimaryButtonStyle}" HorizontalAlignment="Right" Width="100"/>
