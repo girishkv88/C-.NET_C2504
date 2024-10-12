@@ -1,43 +1,4 @@
-To design the User Management Page for the Smart Manufacturing Analytics Dashboard, you'll need to consider the following key components:
 
-Key Features for the User Management Page:
-
-1. User Listing (DataGrid):
-
-Display a list of all users with details like username, role, created date, and last login.
-
-
-
-2. Add New User:
-
-A form or popup to add new users with fields like username, password, and role.
-
-
-
-3. Edit User:
-
-Option to update user roles or reset passwords.
-
-
-
-4. Delete User:
-
-Ability to remove users from the system (with confirmation).
-
-
-
-5. Role Management:
-
-Dropdown or selection for assigning roles like "Admin," "Operator," and "Manager."
-
-
-
-
-Design Steps in WPF (MVVM Approach):
-
-1. XAML UI Design:
-
-You can create a DataGrid for listing users and buttons for adding, editing, and deleting users.
 
 <Window x:Class="SmartDashboard.Views.UserManagementPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -69,104 +30,73 @@ You can create a DataGrid for listing users and buttons for adding, editing, and
     </Grid>
 </Window>
 
-2. ViewModel (UserManagementViewModel.cs):
-
-This will handle the logic behind the page. You can define observable collections and commands for user management.
-
-public class UserManagementViewModel : INotifyPropertyChanged
-{
-    public ObservableCollection<User> Users { get; set; }
-    private User _selectedUser;
-    public User SelectedUser
-    {
-        get => _selectedUser;
-        set
-        {
-            _selectedUser = value;
-            OnPropertyChanged(nameof(SelectedUser));
-            OnPropertyChanged(nameof(IsUserSelected));
-        }
-    }
-
-    public bool IsUserSelected => SelectedUser != null;
-
-    // Commands for Add, Edit, Delete
-    public ICommand AddUserCommand { get; }
-    public ICommand EditUserCommand { get; }
-    public ICommand DeleteUserCommand { get; }
-
-    public UserManagementViewModel()
-    {
-        Users = new ObservableCollection<User>(LoadUsersFromDatabase());
-
-        // Command initialization
-        AddUserCommand = new RelayCommand(AddUser);
-        EditUserCommand = new RelayCommand(EditUser, () => IsUserSelected);
-        DeleteUserCommand = new RelayCommand(DeleteUser, () => IsUserSelected);
-    }
-
-    private void AddUser()
-    {
-        // Logic for adding new user
-    }
-
-    private void EditUser()
-    {
-        // Logic for editing selected user
-    }
-
-    private void DeleteUser()
-    {
-        // Logic for deleting selected user
-    }
-
-    // Example method to load users from the database
-    private List<User> LoadUsersFromDatabase()
-    {
-        // Fetch from database
-        return new List<User>
-        {
-            new User { Username = "admin", Role = "Admin", CreatedAt = DateTime.Now.AddMonths(-1), LastLogin = DateTime.Now.AddDays(-1) },
-            new User { Username = "operator1", Role = "Operator", CreatedAt = DateTime.Now.AddMonths(-2), LastLogin = DateTime.Now.AddHours(-5) }
-        };
-    }
-
-    // INotifyPropertyChanged implementation
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string propertyName) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-}
-
-3. User Model (User.cs):
-
-Create a User class representing the user data.
-
-public class User
-{
-    public int UserID { get; set; }
-    public string Username { get; set; }
-    public string PasswordHash { get; set; }
-    public string Role { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? LastLogin { get; set; }
-}
-
-4. SQL Integration:
-
-For database interaction, you'll need SQL queries to add, edit, delete, and fetch users. Use Entity Framework or direct SQL commands in the ViewModel to update the database.
-
-Example query for fetching users:
-
-SELECT UserID, Username, Role, CreatedAt, LastLogin FROM Users;
-
-Enhancements:
-
-Role-Based Access Control: Ensure only admins can add, edit, or delete users.
-
-Password Handling: Use hashing and salting for secure password storage.
-
-Confirmation Dialogs: Add confirmation for sensitive actions like deleting a user.
+updated 
 
 
-Let me know if you'd like help implementing any specific part!
+  <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="UserNameTextBox" Width="200" Margin="0,0,10,0" PlaceholderText="Enter Username"/>
+            <Button Content="Add User" Width="100" Click="AddUser_Click" Style="{StaticResource NavButtonStyle}"/>
+            <Button Content="Edit User" Width="100" Click="EditUser_Click" Style="{StaticResource NavButtonStyle}"/>
+            <Button Content="Delete User" Width="100" Click="DeleteUser_Click" Style="{StaticResource NavButtonStyle}"/>
+        </StackPanel>
+
+        <DataGrid x:Name="UserDataGrid" Grid.Row="1" Margin="10" AutoGenerateColumns="False" 
+                  SelectionMode="Single" SelectionUnit="FullRow" 
+                  Background="{StaticResource DataGridBackground}" 
+                  Foreground="{StaticResource DataGridForeground}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="*"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+
+
+ <Window.Resources>
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="WindowBackground" Color="#34495E"/>
+        <SolidColorBrush x:Key="ButtonBackground" Color="#2C3E50"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+        <SolidColorBrush x:Key="DataGridBackground" Color="#ECF0F1"/>
+        <SolidColorBrush x:Key="DataGridForeground" Color="#34495E"/>
+
+        <!-- Button Style -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Effect" Value="{StaticResource DropShadowEffect}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- DataGrid Style -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource DataGridBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource DataGridForeground}"/>
+            <Setter Property="RowBackground" Value="{DynamicResource DataGridBackground}"/>
+            <Setter Property="AlternatingRowBackground" Value="#BDC3C7"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+        </Style>
+    </Window.Resources>
