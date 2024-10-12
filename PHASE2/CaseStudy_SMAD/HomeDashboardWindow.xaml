@@ -1,3 +1,24 @@
+<Application x:Class="SmartManufacturingDashboard.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Title="Smart Manufacturing Analytics Dashboard" Height="350" Width="525">
+    <Application.Resources>
+        <!-- Define DropShadowEffect -->
+        <DropShadowEffect x:Key="DropShadowEffect"
+                          Color="#FF000000"  <!-- Shadow color -->
+                          Direction="315"     <!-- Direction of the shadow -->
+                          ShadowDepth="5"     <!-- Distance of the shadow -->
+                          BlurRadius="10"     <!-- Blur radius for the shadow -->
+                          Opacity="0.5" />    <!-- Opacity of the shadow -->
+    </Application.Resources>
+</Application>
+
+
+
+
+
+
+
 <Window x:Class="SmartManufacturingDashboard.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
