@@ -119,48 +119,55 @@
 improved code for butten on left 
 
 
-<StackPanel Background="#2C3E50" Width="200" DockPanel.Dock="Left">
-    <!-- Define a Style for the Buttons -->
-    <StackPanel.Resources>
-        <Style TargetType="Button">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="0,10,0,0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="5" >
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3B5998"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#2A487B"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </StackPanel.Resources>
+Add the following style inside the <Application.Resources> section of your App.xaml:
 
-    <Button Content="Home" />
-    <Button Content="Data Visualization" />
-    <Button Content="Performance Monitoring" />
-    <Button Content="Bottleneck Analysis" />
-    <Button Content="Alerts" />
-    <Button Content="Reports" />
-    <Button Content="Settings" />
+xml
+Copy code
+<Application.Resources>
+    <Style x:Key="NavButtonStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#3B5998"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#2A487B"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</Application.Resources>
+Step 2: Use the Static Resource in Your StackPanel
+Now, reference the button style in your StackPanel:
+
+xml
+Copy code
+<StackPanel Background="#2C3E50" Width="200" DockPanel.Dock="Left">
+    <Button Content="Home" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Data Visualization" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Performance Monitoring" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Bottleneck Analysis" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Alerts" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Reports" Style="{StaticResource NavButtonStyle}" />
+    <Button Content="Settings" Style="{StaticResource NavButtonStyle}" />
     
     <!-- User Management Button, visible only if the user is an Admin -->
     <Button Content="User Management" 
+            Style="{StaticResource NavButtonStyle}" 
             Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
 </StackPanel>
-
