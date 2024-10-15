@@ -1,0 +1,211 @@
+To create a New User Creation Page in your Smart Manufacturing Analytics Dashboard project, you can follow this approach. This page will include fields for entering the user's details (like Name, Email, Password, etc.), validation, and a submit button to create the user. Here's a clean, responsive WPF design with appropriate styles for your new user creation page.
+
+New User Creation Page XAML
+
+<Window x:Class="SmartManufacturingAnalyticsDashboard.NewUserCreationPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New User Creation"
+        Height="600"
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <!-- Colors -->
+        <Color x:Key="WindowBackgroundColor">#FFFFFF</Color>
+        <Color x:Key="HeaderBackgroundColor">#007ACC</Color>
+        <Color x:Key="ContentBackgroundColor">#F5F5F5</Color>
+        <Color x:Key="ButtonBackgroundColor">#007ACC</Color>
+        <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
+        <Color x:Key="TextBoxBorderColor">#CCCCCC</Color>
+        
+        <!-- Text Styles -->
+        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <Style x:Key="LabelTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <!-- Button Styles -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundColor}"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="10,10,0,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource WindowBackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Orientation="Vertical" Background="{StaticResource HeaderBackgroundColor}" Margin="0">
+            <TextBlock Text="Create New User" 
+                       Style="{StaticResource HeaderTextStyle}" 
+                       HorizontalAlignment="Center" 
+                       Margin="10"/>
+        </StackPanel>
+
+        <!-- Form Area -->
+        <ScrollViewer Grid.Row="1" Margin="20">
+            <StackPanel Background="{StaticResource ContentBackgroundColor}" Padding="20" HorizontalAlignment="Center" Width="400">
+                <!-- User Name -->
+                <TextBlock Text="Full Name" Style="{StaticResource LabelTextStyle}" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Name="txtName"/>
+                
+                <!-- Email -->
+                <TextBlock Text="Email" Style="{StaticResource LabelTextStyle}" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Name="txtEmail"/>
+
+                <!-- Password -->
+                <TextBlock Text="Password" Style="{StaticResource LabelTextStyle}" />
+                <PasswordBox Style="{StaticResource TextBoxStyle}" Name="txtPassword"/>
+
+                <!-- Confirm Password -->
+                <TextBlock Text="Confirm Password" Style="{StaticResource LabelTextStyle}" />
+                <PasswordBox Style="{StaticResource TextBoxStyle}" Name="txtConfirmPassword"/>
+
+                <!-- Role Selection -->
+                <TextBlock Text="Role" Style="{StaticResource LabelTextStyle}" />
+                <ComboBox Style="{StaticResource TextBoxStyle}" Name="cmbRole" SelectedIndex="0">
+                    <ComboBoxItem Content="Admin"/>
+                    <ComboBoxItem Content="User"/>
+                </ComboBox>
+
+                <!-- Submit Button -->
+                <Button Content="Create User" Style="{StaticResource PrimaryButtonStyle}" Width="150" HorizontalAlignment="Center" Click="CreateUser_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
+
+Key Features in the Page
+
+1. User Fields:
+
+Full Name (TextBox)
+
+Email (TextBox)
+
+Password (PasswordBox)
+
+Confirm Password (PasswordBox)
+
+Role selection (ComboBox for Admin/User roles)
+
+
+
+2. Validation (Optional): In the code-behind, you can handle the validation (e.g., ensuring the passwords match, checking the format of the email).
+
+
+3. Responsive Design:
+
+The form is centered using HorizontalAlignment="Center".
+
+The page is designed with scrollability in case of smaller screens using ScrollViewer.
+
+
+
+
+Code-Behind (C#)
+
+In the code-behind (NewUserCreationPage.xaml.cs), you can handle the creation logic and form validation:
+
+using System.Windows;
+
+namespace SmartManufacturingAnalyticsDashboard
+{
+    public partial class NewUserCreationPage : Window
+    {
+        public NewUserCreationPage()
+        {
+            InitializeComponent();
+        }
+
+        private void CreateUser_Click(object sender, RoutedEventArgs e)
+        {
+            string name = txtName.Text;
+            string email = txtEmail.Text;
+            string password = txtPassword.Password;
+            string confirmPassword = txtConfirmPassword.Password;
+            string role = ((ComboBoxItem)cmbRole.SelectedItem).Content.ToString();
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (password != confirmPassword)
+            {
+                MessageBox.Show("Passwords do not match.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Logic to create a new user, e.g., save to database or perform other operations
+
+            MessageBox.Show("User created successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Optionally, close the window or reset the form
+        }
+    }
+}
+
+Key Code-Behind Logic
+
+1. Validation:
+
+Ensure all fields are filled.
+
+Validate that the password and confirm password fields match.
+
+
+
+2. User Creation Logic:
+
+Here, you could implement actual database operations to store the user information.
+
+
+
+3. Success/Error Messages:
+
+Show MessageBox notifications to inform the user about the status of the action.
+
+
+
+
+Styles Recap
+
+HeaderTextStyle: For the page title.
+
+LabelTextStyle: For labels above each input field.
+
+TextBoxStyle: For consistent text box styling, also applied to PasswordBox.
+
+PrimaryButtonStyle: Styled button for user creation.
+
+
+Conclusion
+
+This New User Creation Page provides an intuitive form for adding new users to the system, with validation in place to ensure correct input. It’s designed to be responsive and easy to use, ensuring consistent styling with the rest of your Smart Manufacturing Analytics Dashboard project.
+
+
