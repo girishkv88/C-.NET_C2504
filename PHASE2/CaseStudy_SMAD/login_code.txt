@@ -1,0 +1,286 @@
+IuserRepo
+
+--------
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SMAD.Repo
+{
+    public interface IUserRepo
+    {
+        bool IsUserAuthenticated { get; set; }
+        User CurrentUser { get; set; }
+        void Login(User user);
+        ObservableCollection<User> ReadAll();
+        void Create(User newUser);
+        void Update(User newUser);
+        void Delete(User user);
+    }
+}
+
+-----
+EFuserRepo
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SMAD.Repo;
+using SMAD.EFRepo;
+using SMAD.ViewModels;
+
+namespace SMAD.EFRepo
+{
+    public class EFUserRepo : IUserRepo
+    {
+        private static EFUserRepo _instance;
+        public ObservableCollection<User> Users { get;  set; }
+
+        public bool IsUserAuthenticated { get; set; }
+        public User CurrentUser { get; set; } = null;
+
+        public static  EFUserRepo Instance 
+        {
+            get
+            {
+                if(_instance == null)
+                    _instance = new EFUserRepo();
+                return _instance;
+            }
+        
+        }
+
+        public User CurrenrUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        private SmadDbEntities _context;
+
+        public EFUserRepo()
+        {
+            _context = new SmadDbEntities();
+            Users = new ObservableCollection<User>(_context.Users.ToList());
+
+
+        }
+
+        public void Create(User newUser)
+        {
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+        }
+
+        public void Delete(User newUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(User newUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<User>ReadAll()
+        {
+            return Users;
+        }
+
+        public void Login(User user)
+        {
+            var User = _context.Users.FirstOrDefault(u => u.Username == user.Username && u.PasswordHash == user.PasswordHash);
+            if (User != null)
+            {
+                throw new Exception("Invalid UserName password");
+            }
+            else {
+                CurrentUser = user;
+            }
+        }
+    }
+}
+
+--------------------
+UserViewModel
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using SMAD.EFRepo;
+using SMAD.Repo;
+using SMAD.ViewModels;
+
+namespace SMAD.ViewModels
+{
+    public delegate void DWindoClose();
+
+    public class UserViewModel : ViewModelBase
+    {
+        public DWindoClose WindowClose;
+
+        public IUserRepo _repo = EFUserRepo.Instance;
+
+        private User _newUser;
+
+
+        public User NewUser
+        {
+            get
+            { 
+                return _newUser; 
+            }
+            set
+            {
+                _newUser = value; onPropertyChanged(nameof(NewUser));
+            } 
+        }
+
+        private User _currentUser;
+
+
+        public User CurrentUser
+        {
+            get
+            {
+                return _currentUser;
+            }
+            set
+            {
+                _currentUser = value; onPropertyChanged(nameof(CurrentUser));
+            }
+        }
+
+        private ObservableCollection<User> _users;
+
+
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                return _users;
+            }
+            set
+            {
+                _users = value; onPropertyChanged(nameof(Users));
+            }
+        }
+
+        public ICommand CreateCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
+
+        public UserViewModel()
+        {
+            NewUser = new User
+            {
+                Username = "",
+                PasswordHash = "",
+                Role ="",
+                CreatedAt = DateTime.Now,
+                LastLogin = DateTime.Now,
+
+            };
+
+            CurrentUser = new User
+            {
+                Username = "",
+                PasswordHash= ""
+            };
+
+            LoadUsers();
+            CreateCommand = new RelayCommand(Create);
+            LoginCommand = new RelayCommand(Login);
+        }
+
+        private void LoadUsers()
+        {
+            Users = _repo.ReadAll();
+        }
+
+        private void Create()
+        {
+            var newUser = new User
+            {
+                Username = NewUser.Username,
+                PasswordHash = NewUser.PasswordHash,
+                Role = NewUser.Role,
+                CreatedAt = DateTime.Now,
+                LastLogin = DateTime.Now,
+            };
+            try
+            {
+                var result = MessageBox.Show(messageBoxText: "Are you sure to Create ?",
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
+                if (result != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+                _repo.Create(newUser);/////
+
+                result = MessageBox.Show(messageBoxText: "Created Successfully",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+
+                LoadUsers();
+
+                if (WindowClose != null)
+                {
+                    WindowClose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        public bool CanLogin()
+        {
+            return CurrentUser.Username.Length > 0 && CurrentUser.PasswordHash.Length > 0;  
+        }
+
+        private void Login()
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
+        
+    }
+}
+
+
+-----------------xaml
+
+
+        <!-- Login Form -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <TextBlock Text="Username" 
+                       Foreground="White" 
+                       FontWeight="Bold" Margin="0,10,0,5"/>
+            <TextBox x:Name="UsernameTextBox" Width="200" Style="{StaticResource {x:Type TextBox}}" Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+            <TextBlock Text="Password" 
+                       Foreground="White" 
+                       FontWeight="Bold" Margin="0,20,0,5"/>
+            <TextBox x:Name="PasswordBox" Width="200" Style="{StaticResource {x:Type TextBox}}" Text="{Binding CurrentUser.PasswordHash, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <!--<PasswordBox x:Name="PasswordBox" Width="200" Style="{StaticResource {x:Type PasswordBox}}"/>-->
+
+            <Button Content="Login" Width="200" 
+                    Command="{Binding LoginCommand}" 
+                    IsDefault="True" Margin="0,20,0,0" />
+
+
+----------------
