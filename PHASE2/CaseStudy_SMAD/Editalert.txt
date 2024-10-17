@@ -1,0 +1,105 @@
+To make the "Edit Alert" window responsive and more structured, I suggest replacing the Canvas layout with a Grid as we did previously for the "Add Alert" window. This will improve the layout's flexibility and responsiveness when resizing the window.
+
+Here's the updated XAML using a Grid layout:
+
+Updated XAML with Grid:
+
+<Window x:Class="SMAD.Pages.EditAlertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Edit Alert" Height="450" Width="800" WindowState="Maximized" >
+    
+    <Grid Margin="20">
+        <!-- Define Grid Rows and Columns -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header row -->
+            <RowDefinition Height="Auto"/> <!-- LineID row -->
+            <RowDefinition Height="Auto"/> <!-- AlertType row -->
+            <RowDefinition Height="Auto"/> <!-- AlertDate row -->
+            <RowDefinition Height="Auto"/> <!-- Severity row -->
+            <RowDefinition Height="Auto"/> <!-- Message row -->
+            <RowDefinition Height="Auto"/> <!-- Resolved row -->
+            <RowDefinition Height="*"/>   <!-- Empty space (to push Update button down) -->
+            <RowDefinition Height="Auto"/> <!-- Button row -->
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/> <!-- Label column -->
+            <ColumnDefinition Width="3*"/> <!-- Input field column -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Edit Alert" 
+                   Background="#007ACC" Foreground="White" FontSize="28" FontWeight="Bold" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Height="53" />
+
+        <!-- LineID -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="LineID" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedAlert.LineID}" Width="200" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <!-- AlertType -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="AlertType" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedAlert.AlertType}" Width="200" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <!-- AlertDate -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="AlertDate" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedAlert.AlertDate}" Width="200" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <!-- Severity -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Severity" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedAlert.Severity}" Width="200" VerticalAlignment="Center" IsEnabled="False"/>
+
+        <!-- Message -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Message" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedAlert.Message}" Width="200" VerticalAlignment="Center" Height="60" TextWrapping="Wrap" IsEnabled="False"/>
+
+        <!-- Resolved -->
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Resolved" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <CheckBox Grid.Row="6" Grid.Column="1" Content="Is Resolved" IsChecked="{Binding SelectedAlert.Resolved}" VerticalAlignment="Center" />
+
+        <!-- Update Button -->
+        <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Update" Width="156" Height="40" Command="{Binding UpdateCommand}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
+
+Explanation of Changes:
+
+1. Grid Layout:
+
+The form now uses a Grid layout with 9 rows. This keeps the form clean and responsive when resized.
+
+The columns are set up similarly, with one column for labels and one for input fields. The width distribution is controlled using 2* for labels and 3* for inputs.
+
+
+
+2. Header:
+
+A header is added at the top, styled with background color and centered text.
+
+
+
+3. Input Fields:
+
+The textboxes and checkboxes are aligned in a form-like structure. The fields that are disabled (IsEnabled="False") to prevent editing reflect read-only data.
+
+
+
+4. Responsiveness:
+
+The Grid layout ensures the form is flexible and resizes properly when the window is maximized or restored.
+
+
+
+5. Control Styling:
+
+The controls are given appropriate margins and aligned for clarity and user experience.
+
+
+
+
+This approach makes your "Edit Alert" window more organized and responsive, improving its usability in different window sizes.
+
