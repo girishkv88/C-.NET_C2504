@@ -1,0 +1,68 @@
+The code can be implemented in the code-behind file of your WPF window or user control. This file has the .xaml.cs extension and is automatically associated with your .xaml file.
+
+For example, if you are working in a window named MainWindow.xaml, the corresponding code-behind file will be MainWindow.xaml.cs.
+
+Here’s how you should organize the code:
+
+1. In MainWindow.xaml:
+
+Add the TextBox and bind the TextChanged event.
+
+<Window x:Class="YourNamespace.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox Name="PasswordTextBox" TextChanged="PasswordTextBox_TextChanged" Width="200" />
+    </Grid>
+</Window>
+
+2. In MainWindow.xaml.cs:
+
+Implement the PasswordTextBox_TextChanged event handler and the logic for masking the password.
+
+using System.Windows;
+using System.Windows.Controls;
+
+namespace YourNamespace
+{
+    public partial class MainWindow : Window
+    {
+        private string _actualPassword = string.Empty;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void PasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int caretPos = PasswordTextBox.CaretIndex;
+            string currentText = PasswordTextBox.Text;
+
+            if (currentText.Length < _actualPassword.Length) // Handle backspace
+            {
+                _actualPassword = _actualPassword.Remove(_actualPassword.Length - 1);
+            }
+            else // Handle new characters
+            {
+                string addedText = currentText.Substring(_actualPassword.Length);
+                _actualPassword += addedText;
+            }
+
+            // Replace visible characters with asterisks
+            PasswordTextBox.Text = new string('*', _actualPassword.Length);
+            PasswordTextBox.CaretIndex = caretPos; // Maintain caret position
+        }
+    }
+}
+
+Summary:
+
+MainWindow.xaml is where you define your UI elements (like TextBox).
+
+MainWindow.xaml.cs is where you write the logic to handle the TextBox behavior and mask the input as the user types.
+
+
+Make sure to replace YourNamespace with the appropriate namespace in your project.
+
