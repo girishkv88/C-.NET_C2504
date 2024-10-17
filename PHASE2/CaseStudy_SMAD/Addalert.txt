@@ -1,0 +1,115 @@
+To make the "Add Alert" window responsive while keeping the layout cleaner and more flexible, you can replace the Canvas with a Grid. This will allow the layout to adapt to different window sizes and maintain a structured arrangement.
+
+Here’s how you can modify your XAML to use a Grid for responsiveness:
+
+Key Improvements:
+
+1. Grid Layout: Define rows and columns for a structured form layout.
+
+
+2. Uniform Spacing: Align labels and input fields in a more consistent and readable way.
+
+
+3. Proportional Sizing: Use star-sizing (*) for flexible columns and row heights, so they resize when the window is maximized.
+
+
+
+Updated XAML:
+
+<Window x:Class="SMAD.Pages.AddAlertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Add Alert" Height="450" Width="800" WindowState="Maximized">
+    
+    <Grid Margin="20">
+        <!-- Define Grid Rows and Columns -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header row -->
+            <RowDefinition Height="Auto"/> <!-- LineID row -->
+            <RowDefinition Height="Auto"/> <!-- AlertType row -->
+            <RowDefinition Height="Auto"/> <!-- AlertDate row -->
+            <RowDefinition Height="Auto"/> <!-- Severity row -->
+            <RowDefinition Height="Auto"/> <!-- Message row -->
+            <RowDefinition Height="Auto"/> <!-- Resolved row -->
+            <RowDefinition Height="*"/>   <!-- Empty space (to push Create button down) -->
+            <RowDefinition Height="Auto"/> <!-- Button row -->
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/> <!-- Label column -->
+            <ColumnDefinition Width="3*"/> <!-- Input field column -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Alerts and Notifications" 
+                   Background="#007ACC" Foreground="White" FontSize="28" FontWeight="Bold" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Height="53" />
+
+        <!-- LineID -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="LineID" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewAlert.LineID}" Width="200" VerticalAlignment="Center"/>
+
+        <!-- AlertType -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="AlertType" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NewAlert.AlertType}" Width="200" VerticalAlignment="Center"/>
+
+        <!-- AlertDate -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="AlertDate" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NewAlert.AlertDate}" Width="200" VerticalAlignment="Center"/>
+
+        <!-- Severity -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Severity" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding NewAlert.Severity}" Width="200" VerticalAlignment="Center"/>
+
+        <!-- Message -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Message" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding NewAlert.Message}" Width="200" VerticalAlignment="Center" Height="60" TextWrapping="Wrap"/>
+
+        <!-- Resolved -->
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Resolved" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+        <CheckBox Grid.Row="6" Grid.Column="1" Content="Is Resolved" IsChecked="{Binding NewAlert.Resolved}" VerticalAlignment="Center"/>
+
+        <!-- Create Button -->
+        <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Create" Width="156" Height="40" Command="{Binding CreateCommand}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
+
+Explanation of the Changes:
+
+1. Grid Layout:
+
+The layout is divided into a structured grid with 2 columns: one for the labels and one for the input fields.
+
+There are multiple rows for each label and its corresponding input, ensuring a clean form layout.
+
+
+
+2. Row and Column Definitions:
+
+The first column (for labels) has Width="2*", while the second column (for inputs) has Width="3*". This keeps the labels and inputs well-balanced.
+
+Each row is Auto except for the empty row before the button, which uses * to push the "Create" button down to the bottom, keeping it responsive.
+
+
+
+3. Responsiveness:
+
+As the window is resized, the input fields will adjust accordingly, while the button and header maintain their relative positions.
+
+Using the Grid layout ensures that all controls resize proportionally and maintain their alignment when the window is maximized.
+
+
+
+4. Control Styling:
+
+Margins and alignment ensure that labels and inputs are spaced out properly, improving readability and form flow.
+
+
+
+
+This layout is now responsive and structured, making it ideal for use in a maximized window while keeping the form neat and user-friendly.
+
