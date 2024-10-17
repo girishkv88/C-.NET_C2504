@@ -344,3 +344,7 @@ Message: A message at the bottom informs users that this feature is under develo
 
 To show a message when buttons are clicked, you can add a simple method in the
 
+private void ShowNotImplementedMessage(object sender, RoutedEventArgs e)
+{
+    MessageBox.Show("This feature is under development.", "Not Implemented", MessageBoxButton.OK, MessageBoxImage.Information);
+}
