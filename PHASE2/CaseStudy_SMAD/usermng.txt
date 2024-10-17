@@ -442,3 +442,98 @@ namespace SMAD.ViewModels
         
     }
 }
+
+
+
+userEfrepo
+===============================================
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SMAD.Repo;
+using SMAD.EFRepo;
+using SMAD.ViewModels;
+using SMAD.Entities;
+
+namespace SMAD.EFRepo
+{
+    public class EFUserRepo : IUserRepo
+    {
+        private static EFUserRepo _instance;
+        public ObservableCollection<User> Users { get;  set; }
+
+        public bool IsUserAuthenticated { get; set; }
+        public User CurrentUser { get; set; } = null;
+
+        public static  EFUserRepo Instance 
+        {
+            get
+            {
+                if(_instance == null)
+                    _instance = new EFUserRepo();
+                return _instance;
+            }
+        
+        }
+
+       //public User CurrenrUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        private readonly SmadDbEntities _context;
+
+        public EFUserRepo()
+        {
+            _context = new SmadDbEntities();
+            //Users = new ObservableCollection<User>(_context.Users.ToList());
+
+
+        }
+
+        public void Create(User userModel)
+        {
+            _context.Users.Add(userModel);
+            _context.SaveChanges();
+        }
+
+        public void Delete(User userModel)
+        {
+            var userToDelete = _context.Users.Find(userModel.UserID);
+            if(userToDelete != null)
+            {
+                _context.Users.Remove(userToDelete);
+                _context.SaveChanges();
+            }
+        }
+
+        public void Update(User userModel)
+        {
+            var existingUser = _context.Users.Find(userModel.UserID);
+            if (existingUser != null)
+            {
+                 _context.Entry(existingUser).CurrentValues.SetValues(userModel);
+                // existingUser.Username = userModel.Username;
+                _context.SaveChanges();
+            }
+        }
+
+        public ObservableCollection<User>ReadAll()
+        {
+             return new ObservableCollection<User>(_context.Users.ToList());
+        }
+
+        public void Login(User user)
+        {
+            var User = _context.Users.FirstOrDefault(u => u.Username == user.Username && u.PasswordHash == user.PasswordHash);
+            if (User == null)
+            {
+                throw new Exception("Invalid UserName password");
+            }
+            else {
+                CurrentUser = user;
+            }
+        }
+    }
+}
+
