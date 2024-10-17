@@ -141,4 +141,138 @@ Layout: If you have a global layout or a navigation bar, you can integrate this 
 
 This page will give a polished and informative placeholder without any unnecessary complexity or animation.
 
+_--------------
+
+
+
+Here's a simple design for your Device Integration page, which includes buttons based on your IntegrationSettings table. The buttons will trigger a message box informing the user that the feature is yet to be implemented.
+
+DeviceIntegrationPage.xaml
+
+<Window x:Class="SmartManufacturingAnalyticsDashboard.Views.DeviceIntegrationPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Device Integration" Height="400" Width="600">
+    <Grid Margin="20">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+
+            <!-- Header Text -->
+            <TextBlock Text="Device Integration Settings" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,20"/>
+
+            <!-- Device Selection -->
+            <TextBlock Text="Select Device Type:" FontWeight="SemiBold"/>
+            <ComboBox Width="200" Margin="0,5,0,20">
+                <ComboBoxItem Content="IoT Device Type A" />
+                <ComboBoxItem Content="IoT Device Type B" />
+                <ComboBoxItem Content="Custom Device" />
+            </ComboBox>
+
+            <!-- Button for Device Configuration -->
+            <Button Content="Configure Device" 
+                    Width="150" Height="40" 
+                    Click="ConfigureDevice_Click" 
+                    Margin="0,10,0,20" />
+
+            <!-- Button for Sync Settings -->
+            <Button Content="Sync Device Settings" 
+                    Width="150" Height="40" 
+                    Click="SyncDeviceSettings_Click" 
+                    Margin="0,10,0,20" />
+
+            <!-- Button for Connectivity Status -->
+            <Button Content="Check Connectivity Status" 
+                    Width="150" Height="40" 
+                    Click="CheckConnectivityStatus_Click" 
+                    Margin="0,10,0,20" />
+
+            <!-- Button for Data Sync -->
+            <Button Content="Sync Device Data" 
+                    Width="150" Height="40" 
+                    Click="SyncDeviceData_Click" 
+                    Margin="0,10,0,20" />
+
+            <!-- Button for Reset Device -->
+            <Button Content="Reset Device" 
+                    Width="150" Height="40" 
+                    Click="ResetDevice_Click" 
+                    Margin="0,10,0,20" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+Code-behind for the Buttons (DeviceIntegrationPage.xaml.cs)
+
+using System.Windows;
+
+namespace SmartManufacturingAnalyticsDashboard.Views
+{
+    public partial class DeviceIntegrationPage : Window
+    {
+        public DeviceIntegrationPage()
+        {
+            InitializeComponent();
+        }
+
+        // Event Handlers for each button, showing a message box for unimplemented features
+        private void ConfigureDevice_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Device configuration functionality is to be implemented soon.", "Coming Soon");
+        }
+
+        private void SyncDeviceSettings_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Device settings synchronization functionality is to be implemented soon.", "Coming Soon");
+        }
+
+        private void CheckConnectivityStatus_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Device connectivity check functionality is to be implemented soon.", "Coming Soon");
+        }
+
+        private void SyncDeviceData_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Device data sync functionality is to be implemented soon.", "Coming Soon");
+        }
+
+        private void ResetDevice_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Device reset functionality is to be implemented soon.", "Coming Soon");
+        }
+    }
+}
+
+Explanation:
+
+1. ComboBox for Device Type Selection: Users can select a device type such as "IoT Device Type A," "IoT Device Type B," or "Custom Device." This can be tied to the settings or used in the future.
+
+
+2. Buttons:
+
+Configure Device
+
+Sync Device Settings
+
+Check Connectivity Status
+
+Sync Device Data
+
+Reset Device
+
+
+Each button, when clicked, shows a MessageBox indicating that the functionality is "to be implemented soon."
+
+
+
+Usage:
+
+When the user clicks any of the buttons (e.g., "Configure Device"), a message box appears saying that this feature is not implemented yet but will be coming soon.
+
+This placeholder approach allows the UI to be designed and provides feedback to users until the features are ready to be developed.
+
+
+Does this solution fit your need for a placeholder Device Integration page?
 
