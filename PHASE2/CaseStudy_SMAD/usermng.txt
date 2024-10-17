@@ -88,4 +88,357 @@ namespace SMAD.Pages
     }
 }
 
-          
+          ==========================================
+<Grid Background="#FFFFFF">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <!-- Header -->
+    <StackPanel Orientation="Vertical" Background="#007ACC" Margin="0">
+        <TextBlock Text="Create New User" 
+                   Style="{StaticResource HeaderTextStyle}" 
+                   HorizontalAlignment="Center" 
+                   Margin="10"/>
+    </StackPanel>
+
+    <!-- Form Area -->
+    <ScrollViewer Grid.Row="1" Margin="18,17,22,-12">
+        <StackPanel Background="#F5F5F5" Width="400" Height="400">
+            <!-- User Name -->
+            <TextBlock Text="UserName" Style="{StaticResource LabelTextStyle}" />
+            <TextBox Name="txtName" Text="{Binding NewUser.Username, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+
+            <!-- Password -->
+            <TextBlock Text="Password" Style="{StaticResource LabelTextStyle}" />
+            <!--<PasswordBox Name="txtPassword"/>-->
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Text="{Binding NewUser.PasswordHash, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+
+
+            <!-- Role Selection -->
+            <TextBlock Text="Role" Style="{StaticResource LabelTextStyle}" />
+            <ComboBox Name="cmbRole" SelectedIndex="0" Text="{Binding NewUser.Role, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ComboBoxItem Content="Admin"/>
+                <ComboBoxItem Content="User"/>
+            </ComboBox>
+
+            <!-- Submit Button -->
+            <Button Content="Create User" Style="{StaticResource PrimaryButtonStyle}" Width="150" HorizontalAlignment="Center" Command="{Binding CreateCommand}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Grid>
+-------------------------------------------
+<Grid Background="#FFFFFF">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <!-- Header -->
+    <StackPanel Orientation="Vertical" Background="#007ACC" Margin="0">
+        <TextBlock Text="Update User" 
+               Style="{StaticResource HeaderTextStyle}" 
+               HorizontalAlignment="Center" 
+               Margin="10"/>
+    </StackPanel>
+
+    <!-- Form Area -->
+    <ScrollViewer Grid.Row="1" Margin="18,17,22,-12">
+        <StackPanel Background="#F5F5F5" Width="400" Height="300">
+            <!-- User Name -->
+            <TextBlock Text="UserName" Style="{StaticResource LabelTextStyle}" />
+            <TextBox Name="txtName" Text="{Binding SelectedUser.Username, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+
+            <!-- Password -->
+            <TextBlock Text="Password" Style="{StaticResource LabelTextStyle}" />
+            <!--<PasswordBox Name="txtPassword"/>-->
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Text="{Binding SelectedUser.PasswordHash, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+
+
+            <!-- Role Selection -->
+            <TextBlock Text="Role" Style="{StaticResource LabelTextStyle}" />
+            <ComboBox Name="cmbRole" SelectedIndex="0" Text="{Binding SelectedUser.Role, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ComboBoxItem Content="Admin"/>
+                <ComboBoxItem Content="User"/>
+            </ComboBox>
+
+            <!-- Submit Button -->
+            <Button Content="Update User" Style="{StaticResource PrimaryButtonStyle}" Width="150" HorizontalAlignment="Center" Command="{Binding UpdateCommand}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Grid>
+-------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using SMAD.EFRepo;
+using SMAD.Entities;
+using SMAD.Repo;
+using SMAD.ViewModels;
+
+namespace SMAD.ViewModels
+{
+    public delegate void DWindoClose();
+
+    public class UserViewModel : ViewModelBase
+    {
+        public DWindoClose WindowClose;
+        public DWindoClose EditWindowClose;
+
+        public IUserRepo _repo = EFUserRepo.Instance;
+
+        private User _newUser;
+
+
+        public User NewUser
+        {
+            get
+            { 
+                return _newUser; 
+            }
+            set
+            {
+                _newUser = value; onPropertyChanged(nameof(NewUser));
+            } 
+        }
+
+
+        private User _selectedUser;
+
+
+        public User SelectedUser
+        {
+            get
+            {
+                return _selectedUser;
+            }
+            set
+            {
+                _selectedUser = value; onPropertyChanged(nameof(SelectedUser));
+            }
+        }
+
+
+
+        private User _currentUser;
+
+
+        public User CurrentUser
+        {
+            get
+            {
+                return _currentUser;
+            }
+            set
+            {
+                _currentUser = value; onPropertyChanged(nameof(CurrentUser));
+            }
+        }
+
+        private ObservableCollection<User> _users;
+
+
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                return _users;
+            }
+            set
+            {
+                _users = value; onPropertyChanged(nameof(Users));
+            }
+        }
+
+        public ICommand CreateCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
+
+        public ICommand UpdateCommand { get; set; }
+
+        public ICommand DeleteCommand {  get; set; }
+
+        public UserViewModel()
+        {
+            NewUser = new User
+            {
+                Username = "",
+                PasswordHash = "",
+                Role ="",
+                CreatedAt = DateTime.Now,
+                LastLogin = DateTime.Now,
+
+            };
+
+            CurrentUser = new User
+            {
+                Username = "",
+                PasswordHash= ""
+            };
+
+            LoadUsers();
+            CreateCommand = new RelayCommand(Create);
+            LoginCommand = new RelayCommand(Login);
+            UpdateCommand = new RelayCommand(Update);
+            DeleteCommand = new RelayCommand(Delete);
+        }
+
+        private void Delete()
+        {
+            if (this.SelectedUser == null)
+            {
+                var result1 = MessageBox.Show(messageBoxText: "Please select the user to Delete",
+                        caption: "Alert",
+                        button: MessageBoxButton.OK,
+                        icon: MessageBoxImage.Information);
+                return;
+            }
+
+            var res = MessageBox.Show(messageBoxText: "Are you sure to Delete this User?",
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
+
+            if(res != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            _repo.Delete(this.SelectedUser);
+            this.SelectedUser = this.SelectedUser;
+            var result = MessageBox.Show(messageBoxText: $"Alert {SelectedUser.UserID} is Deleted successfully",
+                       caption: "Alert",
+                       button: MessageBoxButton.OK,
+                       icon: MessageBoxImage.Information);
+            LoadUsers();
+        }
+
+        private void Update()
+        {
+
+            if (this.SelectedUser == null)
+            {
+                return;
+            }
+
+            var res = MessageBox.Show(messageBoxText: "Are you sure to Update this User?",
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
+
+            if (res != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            _repo.Update(this.SelectedUser);
+            this.SelectedUser = this.SelectedUser;
+
+            var result = MessageBox.Show(messageBoxText: $"Alert {SelectedUser.UserID} is updated successfully",
+                        caption: "Alert",
+                        button: MessageBoxButton.OK,
+                        icon: MessageBoxImage.Information);
+            LoadUsers();
+
+            if (EditWindowClose != null)
+            {
+                EditWindowClose();
+            }
+        }
+
+        private void LoadUsers()
+        {
+            Users = _repo.ReadAll();
+        }
+
+        private void Create()
+        {
+            var newUser = new User
+            {
+                Username = NewUser.Username,
+                PasswordHash = NewUser.PasswordHash,
+                Role = NewUser.Role,
+                CreatedAt = DateTime.Now,
+                LastLogin = DateTime.Now,
+            };
+            try
+            {
+                var result = MessageBox.Show(messageBoxText: "Are you sure to Create ?",
+                    caption: "Confirm",
+                    button: MessageBoxButton.YesNo,
+                    icon: MessageBoxImage.Question);
+                if (result != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+                _repo.Create(newUser);/////
+
+                result = MessageBox.Show(messageBoxText: "Created Successfully",
+                    caption: "Alert",
+                    button: MessageBoxButton.OK,
+                    icon: MessageBoxImage.Information);
+
+                LoadUsers();
+
+                if (WindowClose != null)
+                {
+                    WindowClose();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        public bool CanLogin()
+        {
+            return CurrentUser.Username.Length > 0 && CurrentUser.PasswordHash.Length > 0;  
+        }
+
+        private void Login()
+        {
+            try
+            {
+                _repo.Login(CurrentUser);
+                MessageBox.Show($"Login SuccessFull");
+
+
+                if (CurrentUser.Username == "admin")
+                {
+                    
+                    SmadConfig.adminDashboardWindow.Show();
+                }
+                else
+                {
+                    SmadConfig.homeDashboardWindow.Show();
+                }
+                if (WindowClose != null)
+                {
+                    WindowClose();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        
+
+        
+    }
+}
