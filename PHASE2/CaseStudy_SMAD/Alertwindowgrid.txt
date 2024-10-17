@@ -1,0 +1,91 @@
+To make your "Alerts and Notifications" window responsive, using a Grid layout is the best approach. This allows you to define rows and columns for flexible placement of controls, ensuring that they resize and adjust as the window size changes.
+
+Here’s how you can refactor the layout into a responsive Grid:
+
+1. Grid Layout: Define rows for the header, data grid, and buttons.
+
+
+2. Proportional Sizing: Use * (star sizing) to make rows adjust automatically with window resizing.
+
+
+3. Alignment: Ensure controls are centered or stretched to fill available space.
+
+
+4. Margin and Padding: Add margins to create space between elements.
+
+
+
+Here’s the updated XAML with the responsive grid layout:
+
+<Window x:Class="SMAD.Pages.AlertAndNotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Alerts and Notifications"
+        Height="600"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFFFFF"
+        WindowState="Maximized">
+    
+    <!-- Main Grid Layout -->
+    <Grid>
+        <!-- Define Grid Rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header row -->
+            <RowDefinition Height="*"/>    <!-- Alerts list row (fills remaining space) -->
+            <RowDefinition Height="Auto"/> <!-- Buttons row -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="#007ACC" Grid.Row="0" Height="53">
+            <TextBlock Text="Alerts and Notifications" Foreground="White" FontSize="28" 
+                       FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Alerts List -->
+        <DataGrid x:Name="grdAlerts" Grid.Row="1" Margin="20"
+                  SelectionMode="Single" ItemsSource="{Binding Alerts}"
+                  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAlert , Mode=TwoWay}" 
+                  IsReadOnly="True" AreRowDetailsFrozen="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="AlertID" Binding="{Binding AlertID}" />
+                <DataGridTextColumn Header="LineID" Binding="{Binding LineID}" />
+                <DataGridTextColumn Header="AlertDate" Binding="{Binding AlertDate}" />
+                <DataGridTextColumn Header="AlertType" Binding="{Binding AlertType}" />
+                <DataGridTextColumn Header="Severity" Binding="{Binding Severity}" />
+                <DataGridTextColumn Header="Message" Binding="{Binding Message}" />
+                <DataGridTextColumn Header="Resolved" Binding="{Binding Resolved}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+            <Button x:Name="btnAddAlert" Content="Add Alert" Width="100" Height="36" Click="btnAddAlert_Click" />
+            <Button x:Name="btnEditAlert" Content="Edit Alert" Width="100" Height="36" Margin="10,0,0,0" Click="btnEditAlert_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+Key Changes for Responsiveness:
+
+1. Grid Structure:
+
+Rows: The first row (header) uses Auto height, the second row (data grid) uses * to take up the remaining space, and the third row (buttons) uses Auto height.
+
+This ensures the DataGrid expands or shrinks with the window, while the header and buttons stay fixed.
+
+
+
+2. DataGrid:
+
+Placed in the second row with a Margin="20" for spacing.
+
+It will resize when the window is resized due to the * in the row definition.
+
+
+
+3. 
+
