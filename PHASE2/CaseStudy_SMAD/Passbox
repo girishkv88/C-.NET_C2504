@@ -1,4 +1,4 @@
-The code can be implemented in the code-behind file of your WPF window or user control. This file has the .xaml.cs extension and is automatically associated with your .xaml file.
+inThe code can be implemented in the code-behind file of your WPF window or user control. This file has the .xaml.cs extension and is automatically associated with your .xaml file.
 
 For example, if you are working in a window named MainWindow.xaml, the corresponding code-behind file will be MainWindow.xaml.cs.
 
@@ -275,4 +275,72 @@ This placeholder approach allows the UI to be designed and provides feedback to 
 
 
 Does this solution fit your need for a placeholder Device Integration page?
+
+&&&&&&&&
+
+
+Here's a basic skeleton for the DataSource Overview page using XAML, where you can design the layout with placeholders for buttons and elements that aren't functional yet. This will visually represent the DataSource Overview but without working functionality:
+
+<Window x:Class="SmartManufacturingAnalyticsDashboard.Views.DataSourceOverviewPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataSource Overview" Height="400" Width="600">
+    <Grid>
+        <TextBlock Text="DataSource Overview" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,20,0,0"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Spacing="15">
+            
+            <!-- Placeholder for DataSource Table -->
+            <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Padding="10">
+                <TextBlock Text="Data Sources Table (To be implemented)" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           FontStyle="Italic"/>
+            </Border>
+
+            <!-- Add DataSource Button (Not functional) -->
+            <Button Content="Add DataSource" Width="200" Height="40" Margin="0,10,0,0" 
+                    HorizontalAlignment="Center"
+                    Click="ShowNotImplementedMessage"/>
+
+            <!-- Remove DataSource Button (Not functional) -->
+            <Button Content="Remove DataSource" Width="200" Height="40" Margin="0,10,0,0" 
+                    HorizontalAlignment="Center"
+                    Click="ShowNotImplementedMessage"/>
+
+            <!-- Refresh DataSource Button (Not functional) -->
+            <Button Content="Refresh DataSource" Width="200" Height="40" Margin="0,10,0,0" 
+                    HorizontalAlignment="Center"
+                    Click="ShowNotImplementedMessage"/>
+
+        </StackPanel>
+
+        <!-- Placeholder for message -->
+        <TextBlock Text="This feature is under development." 
+                   FontSize="16" 
+                   FontStyle="Italic" 
+                   Foreground="Gray" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Bottom" 
+                   Margin="0,0,0,20"/>
+    </Grid>
+</Window>
+
+In this XAML page:
+
+Title: "DataSource Overview" is displayed prominently.
+
+Placeholders: There’s a placeholder (TextBlock) inside a Border to represent where the Data Sources table would go.
+
+Buttons: Buttons for "Add DataSource", "Remove DataSource", and "Refresh DataSource" are included but non-functional, with a Click event calling a method that would show a message like "This feature is under development."
+
+Message: A message at the bottom informs users that this feature is under development.
+
+
+To show a message when buttons are clicked, you can add a simple method in the
 
