@@ -1,3 +1,34 @@
+ <Grid>
+     <StackPanel Margin="20">
+         <TextBlock Text="Patient Registration" FontSize="20" FontWeight="Bold" />
+         
+         <TextBlock Text="Name"  />
+         <TextBox x:Name="NameTextBox"  />
+
+         <TextBlock Text="Age"/>
+         <TextBox x:Name="AgeTextBox"/>
+         
+         <TextBlock Text="Date of Birth:" />
+         <DatePicker x:Name="DOBPicker"  SelectedDateFormat="Short"  DisplayDateEnd="{x:Static sys:DateTime.Now}"/>
+
+         <TextBlock Text="Address:" />
+         <TextBox x:Name="AddressTextBox" />
+         <TextBlock Text="Slot:" />
+         <ComboBox x:Name="SlotComboBox" >
+             <ComboBoxItem Content="Morning"  />
+             <ComboBoxItem Content="Evening" />
+         </ComboBox>
+
+         <TextBlock Text="Booking Date:" />
+         <DatePicker x:Name="BookingDatePicker" SelectedDateFormat="Short" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+         
+         <Button x:Name="btnRegister" Content="Register" Width="100" Height="30" Margin="0,10,0,0" Click="btnRegister_Click" />
+     </StackPanel>
+ </Grid>
+
+
+
+
 
 
 using System;
